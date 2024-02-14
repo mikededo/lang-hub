@@ -1,0 +1,80 @@
+import { fontFamily } from 'tailwindcss/defaultTheme';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./src/**/*.{ts,html,svelte}'],
+  darkMode: 'class',
+  theme: {
+    container: {
+      center: true,
+      screens: { xl: '1100px', '2xl': '1100px' },
+    },
+    extend: {
+      backgroundImage: { paper: 'var(--bg-paper)' },
+      backgroundSize: { 'paper-size': 'var(--bg-paper-size)' },
+      fontFamily: {
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+        mono: ['var(--font-mono)', ...fontFamily.mono],
+      },
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
+          foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          hover: 'hsl(var(--muted-hover))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        tooltip: {
+          DEFAULT: 'hsl(var(--tooltip))',
+          foreground: 'hsl(var(--tooltip-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        extra: {
+          DEFAULT: 'hsl(var(--extra))',
+          foreground: 'hsl(var(--extra-foreground))',
+          def: 'hsl(var(--extra-default))',
+          green: 'hsl(var(--extra-green))',
+          orange: 'hsl(var(--extra-orange))',
+          magenta: 'hsl(var(--extra-magenta))',
+          red: 'hsl(var(--extra-red))',
+          purple: 'hsl(var(--extra-purple))',
+        },
+      },
+    },
+    borderRadius: {
+      DEFAULT: '0.5rem',
+      xl: 'calc(0.5rem + 4px)',
+      lg: 'calc(0.5rem + 2px)',
+      md: 'calc(0.5rem - 2px)',
+      sm: 'calc(0.5rem - 4px)',
+      full: '9999px',
+    },
+  },
+  plugins: [],
+};
