@@ -7,7 +7,7 @@
   import { TextIconButton } from '$lib/components';
   import { Keys } from '$lib/config';
   import { getProject } from '$lib/db';
-  import { TranslationsList } from '$lib/domain/translations';
+  import { TranslationsList, TranslationsListSkeleton } from '$lib/domain/translations';
 
   export let data: PageData;
   const query = createQuery({
@@ -27,13 +27,19 @@
     </a>
     <!-- <Breadcrumbs /> -->
   </div>
-  {#if $query.data}
-    <div class="flex flex-col gap-8">
-      <div class="flex justify-between">
+  <div class="flex flex-col gap-8">
+    <div class="flex justify-between">
+      {#if $query.isLoading}
+        <div class="h-10 w-1/3 rounded bg-muted animate-pulse" />
+      {:else if $query.data}
         <h2 class="text-4xl font-bold">{$query.data.name}</h2>
-        <TextIconButton Icon={FilePlus2}>Add translation</TextIconButton>
-      </div>
-      <TranslationsList translations={$query.data.translations} locales={$query.data.locales} />
+      {/if}
+      <TextIconButton Icon={FilePlus2}>Add translation</TextIconButton>
     </div>
-  {/if}
+    {#if $query.isLoading}
+      <TranslationsListSkeleton />
+    {:else if $query.data}
+      <TranslationsList translations={$query.data.translations} locales={$query.data.locales} />
+    {/if}
+  </div>
 </div>

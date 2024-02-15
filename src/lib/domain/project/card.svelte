@@ -5,15 +5,31 @@
 
   import type { ProjectWithLocales } from '$lib/db';
 
+  let didPrefetch = false;
+
+  export let onPrefetch: ((id: ProjectWithLocales['id']) => void) | undefined = undefined;
   export let project: ProjectWithLocales;
   const { id, name, website_url: website, locales } = project;
+
+  const handleOnPrefetchProject = () => {
+    if (didPrefetch) {
+      return;
+    }
+
+    onPrefetch?.(id);
+    didPrefetch = true;
+  };
 </script>
 
 <div class="w-full p-4 flex gap-6 border rounded">
   <div class="h-28 w-28 bg-muted shrink-0 rounded" />
   <div class="flex flex-col w-full justify-between">
     <div class="flex self-end items-center gap-1">
-      <a href="/project/{id}" class="font-bold text-lg hover:underline">
+      <a
+        href="/project/{id}"
+        class="font-bold text-lg hover:underline"
+        on:mouseenter={handleOnPrefetchProject}
+      >
         {name}
       </a>
       {#if website}
