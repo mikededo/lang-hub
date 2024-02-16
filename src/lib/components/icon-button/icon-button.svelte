@@ -29,6 +29,6 @@
   };
 </script>
 
-<button class={twMerge(iconWrapperClasses, colors[color])} {...$$restProps}>
+<button class={twMerge(iconWrapperClasses, colors[color])} {...$$restProps} on:click>
   <svelte:component this={Icon} class={twMerge(iconSizes[size], 'stroke-inherit')} />
 </button>

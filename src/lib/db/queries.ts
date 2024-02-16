@@ -11,6 +11,9 @@ export const getProjects = async () => (await getProjectsQuery.throwOnError()).d
 export type ProjectsWithLocales = QueryData<typeof getProjectsQuery>;
 export type ProjectWithLocales = ProjectsWithLocales[0];
 
+export const getProject = async (id: Tables<'projects'>['id']) =>
+  (await getProjectTranslations(id).throwOnError()).data;
+
 export const getProjectTranslations = (id: number) =>
   supabaseClient
     .from('projects')
@@ -19,6 +22,19 @@ export const getProjectTranslations = (id: number) =>
     )
     .eq('id', id)
     .single();
-export const getProject = async (id: Tables<'projects'>['id']) =>
-  (await getProjectTranslations(id).throwOnError()).data;
 export type ProjectWithTranslations = QueryData<ReturnType<typeof getProjectTranslations>>;
+
+export const createProjectTranslation = (
+  project: Tables<'projects'>['id'],
+  locales: Tables<'locales'>[],
+  key: Tables<'translations'>['value'],
+) => {
+  const translations = locales.map(({ code }) => ({
+    project_id: project,
+    translation_key: key,
+    locale_code: code,
+    value: '',
+  }));
+
+  return supabaseClient.from('translations').insert(translations).select();
+};

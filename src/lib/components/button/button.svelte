@@ -1,7 +1,4 @@
 <script lang="ts">
-  import type { Icon as LucideIcon } from 'lucide-svelte';
-  import type { ComponentType } from 'svelte';
-
   import { sharedClasses } from './shared';
 
   type ButtonVariant = 'condensed' | 'default';
@@ -9,17 +6,16 @@
 
   export let variant: ButtonVariant = 'default';
   export let color: ButtonColor = 'primary';
-  export let Icon: ComponentType<LucideIcon>;
+  // TODO: CHange for $$props.class
   export let className = '';
 
   const classes = sharedClasses({
     variant,
     color,
-    className: `${className} flex gap-1.5 items-center`,
+    className,
   });
 </script>
 
 <button {...$$restProps} class={classes} on:click>
-  <Icon class="w-4 h-4" />
-  <span><slot /></span>
+  <slot />
 </button>
