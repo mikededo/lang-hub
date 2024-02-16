@@ -27,7 +27,7 @@
     {/if}
   </div>
   <div class="flex flex-col justify-between items-end gap-2">
-    <TranslationActions />
+    <TranslationActions translationKey={translation} />
     {#if typeof translated === 'number'}
       <p class="text-sm">Total locales translated: {translated}</p>
     {/if}

@@ -15,8 +15,7 @@
 
   $: searchParams = $page.url.searchParams;
   $: showDialog =
-    searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.translation &&
-    projectId;
+    searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.create && projectId;
 
   const queryClient = useQueryClient();
   const mutation = createMutation({
@@ -24,7 +23,7 @@
   });
 
   const handleOnClose = () => {
-    const params = new URLSearchParams($page.url.searchParams.toString());
+    const params = new URLSearchParams(searchParams.toString());
     params.delete(QUERY_PARAM_KEYS.dialog);
     goto(`${$page.url.pathname}?${params.toString()}`);
 

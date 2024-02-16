@@ -27,7 +27,7 @@ export type ProjectWithTranslations = QueryData<ReturnType<typeof getProjectTran
 export const createProjectTranslation = (
   project: Tables<'projects'>['id'],
   locales: Tables<'locales'>[],
-  key: Tables<'translations'>['value'],
+  key: Tables<'translations'>['translation_key'],
 ) => {
   const translations = locales.map(({ code }) => ({
     project_id: project,
@@ -36,5 +36,16 @@ export const createProjectTranslation = (
     value: '',
   }));
 
-  return supabaseClient.from('translations').insert(translations).select();
+  return supabaseClient.from('translations').insert(translations).select().throwOnError();
 };
+
+export const deleteProjectTranslation = (
+  project: Tables<'projects'>['id'],
+  key: Tables<'translations'>['translation_key'],
+) =>
+  supabaseClient
+    .from('translations')
+    .delete()
+    .eq('project_id', project)
+    .eq('translation_key', key)
+    .throwOnError();

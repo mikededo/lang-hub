@@ -10,7 +10,8 @@
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { getProject } from '$lib/db';
   import {
-    TranslationDialog,
+    CreateTranslationDialog,
+    DeleteTranslationDialog,
     TranslationsList,
     TranslationsListSkeleton,
   } from '$lib/domain/translations';
@@ -29,7 +30,7 @@
 
   const handleOnCreate = () => {
     const params = new URLSearchParams($page.url.searchParams.toString());
-    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.translation);
+    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.create);
     goto(`${$page.url.pathname}?${params.toString()}`);
   };
 </script>
@@ -62,4 +63,5 @@
   </div>
 </div>
 
-<TranslationDialog {projectId} {locales} />
+<CreateTranslationDialog {projectId} {locales} />
+<DeleteTranslationDialog {projectId} />

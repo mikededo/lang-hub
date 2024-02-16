@@ -1,5 +1,11 @@
-import TranslationDialog from './dialog.svelte';
+import CreateTranslationDialog from './create-dialog.svelte';
+import DeleteTranslationDialog from './delete-dialog.svelte';
 import TranslationsListSkeleton from './list-skeleton.svelte';
 import TranslationsList from './list.svelte';
 
-export { TranslationDialog, TranslationsList, TranslationsListSkeleton };
+export {
+  CreateTranslationDialog,
+  DeleteTranslationDialog,
+  TranslationsList,
+  TranslationsListSkeleton,
+};
