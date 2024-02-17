@@ -10,11 +10,19 @@ export default {
       screens: { xl: '1100px', '2xl': '1100px' },
     },
     extend: {
-      backgroundImage: { paper: 'var(--bg-paper)' },
-      backgroundSize: { 'paper-size': 'var(--bg-paper-size)' },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
+      },
+      height: {
+        topbar: 'var(--topbar-height)',
+        'editor-topbar': 'var(--editor-topbar-height)',
+      },
+      minHeight: {
+        editor: 'var(--min-editor-height)',
+      },
+      width: {
+        'editor-aside': 'var(--editor-aside-width)',
       },
       colors: {
         border: 'hsl(var(--border))',

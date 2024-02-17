@@ -6,8 +6,8 @@
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { TextIconButton } from '$lib/components';
-  import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
+  import { Container, TextIconButton } from '$lib/components';
+  import { Keys, Paths, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { getProject } from '$lib/db';
   import {
     CreateTranslationDialog,
@@ -35,11 +35,11 @@
   };
 </script>
 
-<div class="flex flex-col gap-2">
+<Container class="flex flex-col gap-2">
   <div class="flex justify-between gap-4">
     <a
       class="flex items-center gap-1.5 text-sm font-semibold py-1 px-2 rounded-full cursor-pointer transition-colors hover:bg-muted"
-      href="/"
+      href={Paths.home()}
     >
       <ArrowLeftIcon class="w-4 h-4" strokeWidth={3} />
       <span>Go back</span>
@@ -61,7 +61,7 @@
       <TranslationsList translations={$query.data.translations} locales={$query.data.locales} />
     {/if}
   </div>
-</div>
+</Container>
 
 <CreateTranslationDialog {projectId} {locales} />
 <DeleteTranslationDialog {projectId} />

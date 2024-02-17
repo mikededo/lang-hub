@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  /* Hardcoded height/width values */
+  :root {
+    --topbar-height: 64px;
+    --editor-topbar-height: 56px;
+    --editor-aside-width: 320px;
+    --min-editor-height: calc(
+      calc(100vh - calc(var(--editor-topbar-height) + var(--topbar-height))) - 2px
+    );
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 20%;

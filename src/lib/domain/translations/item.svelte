@@ -2,20 +2,25 @@
   import TranslationActions from './actions.svelte';
 
   import { page } from '$app/stores';
+  import { Paths, QUERY_PARAM_KEYS } from '$lib/config';
   import type { ProjectWithTranslations } from '$lib/db';
   import { Locale, LocaleContainer } from '$lib/domain/locales';
 
   export let translation: string;
   export let translated: number | null | undefined = undefined;
   export let locales: ProjectWithTranslations['locales'];
+
+  const queryParams = { [QUERY_PARAM_KEYS.editorSelectedKey]: translation };
 </script>
 
 <li class="px-4 py-3 flex justify-between border rounded">
   <div class="flex flex-col gap-2">
     <a
-      href="{$page.url.pathname}/editor/{translation}"
-      class="font-semibold text-lg hover:underline hover:underline-offset-2">{translation}</a
+      href={Paths.editor($page.params.slug, { queryParams })}
+      class="font-semibold text-lg hover:underline hover:underline-offset-2"
     >
+      {translation}
+    </a>
     {#if locales.length}
       <LocaleContainer>
         {#each locales as { is_default: isDefault, locale }}

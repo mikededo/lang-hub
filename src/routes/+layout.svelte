@@ -22,7 +22,7 @@
       </div>
     </header>
 
-    <main class="container p-6 xl:px-0">
+    <main>
       <slot />
     </main>
   </div>

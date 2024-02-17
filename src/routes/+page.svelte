@@ -3,6 +3,7 @@
 
   import type { PageData } from './$types';
 
+  import { Container } from '$lib/components';
   import { Keys } from '$lib/config';
   import type { ProjectWithLocales } from '$lib/db';
   import { getProject, getProjects } from '$lib/db';
@@ -23,7 +24,7 @@
   };
 </script>
 
-<div class="w-full h-full">
+<Container class="w-full h-full">
   {#if $query.isLoading}
     <ProjectsGrid>
       <ProjectSkeleton />
@@ -41,4 +42,4 @@
       {/each}
     </ProjectsGrid>
   {/if}
-</div>
+</Container>

@@ -3,6 +3,7 @@
 
   import { Locale, LocaleContainer } from '../locales';
 
+  import { Paths } from '$lib/config';
   import type { ProjectWithLocales } from '$lib/db';
 
   let didPrefetch = false;
@@ -26,7 +27,7 @@
   <div class="flex flex-col w-full justify-between">
     <div class="flex self-end items-center gap-1">
       <a
-        href="/project/{id}"
+        href={Paths.project(id)}
         class="font-bold text-lg hover:underline"
         on:mouseenter={handleOnPrefetchProject}
       >
