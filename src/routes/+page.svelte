@@ -5,7 +5,7 @@
 
   import { Container } from '$lib/components';
   import { Keys } from '$lib/config';
-  import type { ProjectWithLocales } from '$lib/db';
+  import type { ProjectWithLanguages } from '$lib/db';
   import { getProject, getProjects } from '$lib/db';
   import { ProjectCard, ProjectSkeleton, ProjectsGrid } from '$lib/domain/project';
 
@@ -16,7 +16,7 @@
     queryFn: getProjects,
   });
 
-  const handleOnPrefetch = (id: ProjectWithLocales['id']) => {
+  const handleOnPrefetch = (id: ProjectWithLanguages['id']) => {
     data.queryClient.prefetchQuery({
       queryKey: Keys.PROJECT(`${id}`),
       queryFn: async () => await getProject(id),

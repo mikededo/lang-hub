@@ -1,265 +1,327 @@
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
 
 export type Database = {
   public: {
     Tables: {
-      locales: {
+      languages: {
         Row: {
-          code: string;
-          name: string;
-        };
+          code: string
+          id: number
+          name: string
+        }
         Insert: {
-          code: string;
-          name: string;
-        };
+          code: string
+          id?: number
+          name: string
+        }
         Update: {
-          code?: string;
-          name?: string;
-        };
-        Relationships: [];
-      };
-      project_locales: {
+          code?: string
+          id?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      phrases: {
         Row: {
-          is_default: boolean | null;
-          locale_code: string;
-          project_id: number;
-        };
+          default_text: string | null
+          id: number
+          key: string
+          project: number
+        }
         Insert: {
-          is_default?: boolean | null;
-          locale_code: string;
-          project_id: number;
-        };
+          default_text?: string | null
+          id?: number
+          key: string
+          project: number
+        }
         Update: {
-          is_default?: boolean | null;
-          locale_code?: string;
-          project_id?: number;
-        };
+          default_text?: string | null
+          id?: number
+          key?: string
+          project?: number
+        }
         Relationships: [
           {
-            foreignKeyName: 'project_locales_locale_code_fkey';
-            columns: ['locale_code'];
-            isOneToOne: false;
-            referencedRelation: 'locales';
-            referencedColumns: ['code'];
+            foreignKeyName: "phrases_project_fkey"
+            columns: ["project"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      project_languages: {
+        Row: {
+          is_default: boolean | null
+          language_id: number
+          project_id: number
+        }
+        Insert: {
+          is_default?: boolean | null
+          language_id: number
+          project_id: number
+        }
+        Update: {
+          is_default?: boolean | null
+          language_id?: number
+          project_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_languages_language_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: 'project_locales_project_id_fkey';
-            columns: ['project_id'];
-            isOneToOne: false;
-            referencedRelation: 'projects';
-            referencedColumns: ['id'];
+            foreignKeyName: "project_languages_language_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "v_project_languages"
+            referencedColumns: ["language_id"]
           },
           {
-            foreignKeyName: 'project_locales_project_id_fkey';
-            columns: ['project_id'];
-            isOneToOne: false;
-            referencedRelation: 'v_project_details';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
+            foreignKeyName: "project_languages_project_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       projects: {
         Row: {
-          id: number;
-          last_updated: string | null;
-          name: string;
-          website_url: string | null;
-        };
+          id: number
+          last_updated: string | null
+          name: string
+          website_url: string | null
+        }
         Insert: {
-          id?: number;
-          last_updated?: string | null;
-          name: string;
-          website_url?: string | null;
-        };
+          id?: number
+          last_updated?: string | null
+          name: string
+          website_url?: string | null
+        }
         Update: {
-          id?: number;
-          last_updated?: string | null;
-          name?: string;
-          website_url?: string | null;
-        };
-        Relationships: [];
-      };
+          id?: number
+          last_updated?: string | null
+          name?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       translations: {
         Row: {
-          id: number;
-          last_updated: string | null;
-          locale_code: string;
-          project_id: number;
-          translation_key: string;
-          value: string;
-        };
+          id: number
+          language_id: number
+          last_updated: string | null
+          phrase_key: number
+          translated_text: string
+        }
         Insert: {
-          id?: number;
-          last_updated?: string | null;
-          locale_code: string;
-          project_id: number;
-          translation_key: string;
-          value: string;
-        };
+          id?: number
+          language_id: number
+          last_updated?: string | null
+          phrase_key: number
+          translated_text: string
+        }
         Update: {
-          id?: number;
-          last_updated?: string | null;
-          locale_code?: string;
-          project_id?: number;
-          translation_key?: string;
-          value?: string;
-        };
+          id?: number
+          language_id?: number
+          last_updated?: string | null
+          phrase_key?: number
+          translated_text?: string
+        }
         Relationships: [
           {
-            foreignKeyName: 'translations_locale_code_fkey';
-            columns: ['locale_code'];
-            isOneToOne: false;
-            referencedRelation: 'locales';
-            referencedColumns: ['code'];
+            foreignKeyName: "translations_language_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: 'translations_project_id_fkey';
-            columns: ['project_id'];
-            isOneToOne: false;
-            referencedRelation: 'projects';
-            referencedColumns: ['id'];
+            foreignKeyName: "translations_language_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "v_project_languages"
+            referencedColumns: ["language_id"]
           },
           {
-            foreignKeyName: 'translations_project_id_fkey';
-            columns: ['project_id'];
-            isOneToOne: false;
-            referencedRelation: 'v_project_details';
-            referencedColumns: ['id'];
+            foreignKeyName: "translations_phrase_fkey"
+            columns: ["phrase_key"]
+            isOneToOne: false
+            referencedRelation: "phrase_translations"
+            referencedColumns: ["phrase_id"]
           },
-        ];
-      };
-    };
+          {
+            foreignKeyName: "translations_phrase_fkey"
+            columns: ["phrase_key"]
+            isOneToOne: false
+            referencedRelation: "phrases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "translations_phrase_fkey"
+            columns: ["phrase_key"]
+            isOneToOne: false
+            referencedRelation: "v_phrase_translations"
+            referencedColumns: ["phrase_id"]
+          }
+        ]
+      }
+    }
     Views: {
-      v_project_details: {
+      phrase_translations: {
         Row: {
-          id: number | null;
-          last_updated: string | null;
-          locales: Json | null;
-          name: string | null;
-          website_url: string | null;
-        };
-        Insert: {
-          id?: number | null;
-          last_updated?: string | null;
-          locales?: never;
-          name?: string | null;
-          website_url?: string | null;
-        };
-        Update: {
-          id?: number | null;
-          last_updated?: string | null;
-          locales?: never;
-          name?: string | null;
-          website_url?: string | null;
-        };
-        Relationships: [];
-      };
-      v_translations_translated: {
-        Row: {
-          project_id: number | null;
-          total_translated: number | null;
-          translation_key: string | null;
-        };
+          default_text: string | null
+          key: string | null
+          phrase_id: number | null
+          project_id: number | null
+          translation_count: number | null
+        }
         Relationships: [
           {
-            foreignKeyName: 'translations_project_id_fkey';
-            columns: ['project_id'];
-            isOneToOne: false;
-            referencedRelation: 'projects';
-            referencedColumns: ['id'];
-          },
+            foreignKeyName: "phrases_project_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      v_phrase_translations: {
+        Row: {
+          default_text: string | null
+          key: string | null
+          phrase_id: number | null
+          project_id: number | null
+          translation_count: number | null
+        }
+        Relationships: [
           {
-            foreignKeyName: 'translations_project_id_fkey';
-            columns: ['project_id'];
-            isOneToOne: false;
-            referencedRelation: 'v_project_details';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
-    };
+            foreignKeyName: "phrases_project_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      v_project_languages: {
+        Row: {
+          code: string | null
+          is_default: boolean | null
+          language_id: number | null
+          name: string | null
+          project_id: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_languages_project_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+    }
     Functions: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Enums: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     CompositeTypes: {
-      [_ in never]: never;
-    };
-  };
-};
+      [_ in never]: never
+    }
+  }
+}
 
 export type Tables<
   PublicTableNameOrOptions extends
-    | keyof (Database['public']['Tables'] & Database['public']['Views'])
+    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-        Database[PublicTableNameOrOptions['schema']]['Views'])
-    : never = never,
+    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])
+    : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-      Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
-      Row: infer R;
+  ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
     }
     ? R
     : never
-  : PublicTableNameOrOptions extends keyof (Database['public']['Tables'] &
-        Database['public']['Views'])
-    ? (Database['public']['Tables'] &
-        Database['public']['Views'])[PublicTableNameOrOptions] extends {
-        Row: infer R;
-      }
-      ? R
-      : never
-    : never;
+  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
+      Database["public"]["Views"])
+  ? (Database["public"]["Tables"] &
+      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : never
 
 export type TablesInsert<
-  PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
+  PublicTableNameOrOptions extends
+    | keyof Database["public"]["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-    : never = never,
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-      Insert: infer I;
+  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
     }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database['public']['Tables']
-    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
-        Insert: infer I;
-      }
-      ? I
-      : never
-    : never;
+  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
+  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : never
 
 export type TablesUpdate<
-  PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
+  PublicTableNameOrOptions extends
+    | keyof Database["public"]["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-    : never = never,
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-      Update: infer U;
+  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
     }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database['public']['Tables']
-    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
-        Update: infer U;
-      }
-      ? U
-      : never
-    : never;
+  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
+  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : never
 
 export type Enums<
-  PublicEnumNameOrOptions extends keyof Database['public']['Enums'] | { schema: keyof Database },
+  PublicEnumNameOrOptions extends
+    | keyof Database["public"]["Enums"]
+    | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
-    : never = never,
+    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
+    : never = never
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
-    ? Database['public']['Enums'][PublicEnumNameOrOptions]
-    : never;
+  ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
+  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
+  : never

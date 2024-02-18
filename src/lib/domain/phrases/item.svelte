@@ -1,16 +1,16 @@
 <script lang="ts">
-  import TranslationActions from './actions.svelte';
+  import PhraseActions from './actions.svelte';
 
   import { page } from '$app/stores';
   import { Paths, QUERY_PARAM_KEYS } from '$lib/config';
-  import type { ProjectWithTranslations } from '$lib/db';
-  import { Locale, LocaleContainer } from '$lib/domain/locales';
+  import type { ProjectWithPhrases } from '$lib/db';
+  import { Language, LanguageContainer } from '$lib/domain/languages';
 
-  export let translation: string;
+  export let phrase: string;
   export let translated: number | null | undefined = undefined;
-  export let locales: ProjectWithTranslations['locales'];
+  export let languages: ProjectWithPhrases['languages'];
 
-  const queryParams = { [QUERY_PARAM_KEYS.editorSelectedKey]: translation };
+  const queryParams = { [QUERY_PARAM_KEYS.editorSelectedKey]: phrase };
 </script>
 
 <li class="px-4 py-3 flex justify-between border rounded">
@@ -19,20 +19,18 @@
       href={Paths.editor($page.params.slug, { queryParams })}
       class="font-semibold text-lg hover:underline hover:underline-offset-2"
     >
-      {translation}
+      {phrase}
     </a>
-    {#if locales.length}
-      <LocaleContainer>
-        {#each locales as { is_default: isDefault, locale }}
-          {#if locale}
-            <Locale {isDefault} code={locale.code} />
-          {/if}
+    {#if languages.length}
+      <LanguageContainer>
+        {#each languages as { code }}
+          <Language {code} />
         {/each}
-      </LocaleContainer>
+      </LanguageContainer>
     {/if}
   </div>
   <div class="flex flex-col justify-between items-end gap-2">
-    <TranslationActions translationKey={translation} />
+    <PhraseActions translationKey={phrase} />
     {#if typeof translated === 'number'}
       <p class="text-sm">Total locales translated: {translated}</p>
     {/if}

@@ -5,13 +5,12 @@
   import { page } from '$app/stores';
   import { Button, Dialog } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
-  import { createProjectTranslation } from '$lib/db';
+  import { createProjectPhrase } from '$lib/db';
   import type { Tables } from '$lib/types';
 
-  export let projectId: Tables<'translations'>['project_id'];
-  export let locales: Tables<'locales'>[];
+  export let projectId: Tables<'projects'>['id'];
 
-  let translationKey: string;
+  let key: string;
 
   $: searchParams = $page.url.searchParams;
   $: showDialog =
@@ -19,7 +18,7 @@
 
   const queryClient = useQueryClient();
   const mutation = createMutation({
-    mutationFn: async () => await createProjectTranslation(projectId, locales, translationKey),
+    mutationFn: async () => await createProjectPhrase(projectId, key),
   });
 
   const handleOnClose = () => {
@@ -27,10 +26,12 @@
     params.delete(QUERY_PARAM_KEYS.dialog);
     goto(`${$page.url.pathname}?${params.toString()}`);
 
-    translationKey = '';
+    key = '';
   };
 
   const handleOnCreate = () => {
+    // TODO: Add create another one
+    // TODO: If not create another one, redirect to editor
     $mutation.mutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: Keys.PROJECT(`${projectId}`) });
@@ -48,14 +49,14 @@
       <label for="key" class="text-xs font-semibold uppercase">Key</label>
       <input
         name="key"
-        placeholder="Unique locale key..."
-        bind:value={translationKey}
+        placeholder="Unique phrase key..."
+        bind:value={key}
         class="h-10 ring ring-transparent border transition-all focus:ring-offset-white focus:ring-offset-2 focus:ring-primary rounded px-3 py-1 outline-none"
       />
     </div>
 
     <div class="flex items-center justify-end gap-2">
-      <Button disabled={!translationKey} on:click={handleOnCreate}>Create</Button>
+      <Button disabled={!key} on:click={handleOnCreate}>Create</Button>
       <Button color="secondary" on:click={handleOnClose}>Cancel</Button>
     </div>
   </Dialog>

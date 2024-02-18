@@ -10,11 +10,11 @@
   import { Keys, Paths, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { getProject } from '$lib/db';
   import {
-    CreateTranslationDialog,
-    DeleteTranslationDialog,
-    TranslationsList,
-    TranslationsListSkeleton,
-  } from '$lib/domain/translations';
+    CreatePhraseDialog,
+    DeletePhraseDialog,
+    PhrasesList,
+    PhrasesListSkeleton,
+  } from '$lib/domain/phrases';
   import type { Tables } from '$lib/types';
 
   export let data: PageData;
@@ -25,8 +25,8 @@
   });
 
   $: projectId = $query.data?.id ?? 0;
-  $: locales =
-    $query.data?.locales.filter(Boolean).map(({ locale }) => locale as Tables<'locales'>) ?? [];
+  $: languages =
+    $query.data?.languages.filter(Boolean).map((language) => language as Tables<'languages'>) ?? [];
 
   const handleOnCreate = () => {
     const params = new URLSearchParams($page.url.searchParams.toString());
@@ -56,12 +56,12 @@
       <TextIconButton Icon={FilePlus2} on:click={handleOnCreate}>Add translation</TextIconButton>
     </div>
     {#if $query.isLoading}
-      <TranslationsListSkeleton />
+      <PhrasesListSkeleton />
     {:else if $query.data}
-      <TranslationsList translations={$query.data.translations} locales={$query.data.locales} />
+      <PhrasesList phrases={$query.data.phrases} {languages} />
     {/if}
   </div>
 </Container>
 
-<CreateTranslationDialog {projectId} {locales} />
-<DeleteTranslationDialog {projectId} />
+<CreatePhraseDialog {projectId} />
+<DeletePhraseDialog {projectId} />

@@ -1,4 +1,4 @@
 import Header from './header.svelte';
-import KeysList from './keys-list.svelte';
+import PhrasesList from './phrases-list.svelte';
 
-export { Header, KeysList };
+export { Header, PhrasesList };

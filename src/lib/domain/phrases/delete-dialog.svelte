@@ -6,22 +6,21 @@
   import { DangerDialog } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { deleteProjectTranslation } from '$lib/db';
-  import type { ProjectWithTranslations } from '$lib/db';
+  import type { ProjectWithPhrases } from '$lib/db';
   import type { Tables } from '$lib/types';
 
-  export let projectId: Tables<'translations'>['project_id'];
+  export let projectId: Tables<'phrases'>['project'];
 
   const queryClient = useQueryClient();
   const mutation = createMutation({
-    mutationFn: async (translationKey: string) =>
-      await deleteProjectTranslation(projectId, translationKey),
+    mutationFn: async (key: string) => await deleteProjectTranslation(key),
   });
 
   $: searchParams = $page.url.searchParams;
-  $: translationKey = searchParams.get(QUERY_PARAM_KEYS.translationKey);
+  $: phraseKey = searchParams.get(QUERY_PARAM_KEYS.translationKey);
   $: showDialog =
     searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.delete &&
-    translationKey &&
+    phraseKey &&
     projectId;
 
   const handleOnClose = () => {
@@ -33,23 +32,19 @@
   };
 
   const handleOnDelete = () => {
-    if (!translationKey) {
+    if (!phraseKey) {
       return;
     }
 
-    $mutation.mutate(translationKey, {
+    $mutation.mutate(phraseKey, {
       onSuccess: () => {
-        const project = queryClient.getQueryData<ProjectWithTranslations>(
-          Keys.PROJECT(`${projectId}`),
-        );
+        const project = queryClient.getQueryData<ProjectWithPhrases>(Keys.PROJECT(`${projectId}`));
         if (!project) {
           return;
         }
 
         const updated = { ...project };
-        updated.translations = project.translations.filter(
-          ({ translation_key }) => translation_key !== translationKey,
-        );
+        updated.phrases = project.phrases.filter(({ key }) => key !== phraseKey);
         queryClient.setQueryData(Keys.PROJECT(`${projectId}`), updated);
         handleOnClose();
       },
@@ -58,13 +53,9 @@
 </script>
 
 {#if showDialog}
-  <DangerDialog
-    onCancel={handleOnClose}
-    onConfirm={handleOnDelete}
-    disableConfirm={!translationKey}
-  >
+  <DangerDialog onCancel={handleOnClose} onConfirm={handleOnDelete} disableConfirm={!phraseKey}>
     <p slot="description">
-      Do you want to delete the <strong>{translationKey}</strong> key? This action is irreversible.
+      Do you want to delete the <strong>{phraseKey}</strong> key? This action is irreversible.
     </p>
   </DangerDialog>
 {/if}

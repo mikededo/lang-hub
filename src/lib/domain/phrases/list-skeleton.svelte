@@ -1,5 +1,5 @@
 <script>
-  import { LocaleContainer } from '../locales';
+  import { LanguageContainer } from '$lib/domain/languages';
 </script>
 
 <div class="flex flex-col gap-4">
@@ -9,10 +9,10 @@
       <li class="px-4 py-3 flex justify-between border rounded">
         <div class="flex flex-1 flex-col gap-2">
           <div class="h-7 w-1/3 rounded bg-muted animate-pulse" />
-          <LocaleContainer>
+          <LanguageContainer>
             <div class="h-5 w-7 rounded bg-muted animate-pulse" />
             <div class="h-5 w-7 rounded bg-muted animate-pulse" />
-          </LocaleContainer>
+          </LanguageContainer>
         </div>
         <div class="flex flex-col justify-between items-end gap-2 shrink-0">
           <div class="flex items-center gap-2.5">

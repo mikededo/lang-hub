@@ -1,16 +1,15 @@
 <script lang="ts">
   import { ExternalLink } from 'lucide-svelte';
 
-  import { Locale, LocaleContainer } from '../locales';
-
   import { Paths } from '$lib/config';
-  import type { ProjectWithLocales } from '$lib/db';
+  import type { ProjectWithLanguages } from '$lib/db';
+  import { Language, LanguageContainer } from '$lib/domain/languages';
 
   let didPrefetch = false;
 
-  export let onPrefetch: ((id: ProjectWithLocales['id']) => void) | undefined = undefined;
-  export let project: ProjectWithLocales;
-  const { id, name, website_url: website, locales } = project;
+  export let onPrefetch: ((id: ProjectWithLanguages['id']) => void) | undefined = undefined;
+  export let project: ProjectWithLanguages;
+  const { id, name, website_url: website, languages } = project;
 
   const handleOnPrefetchProject = () => {
     if (didPrefetch) {
@@ -45,12 +44,12 @@
       {/if}
     </div>
     <div class="text-xs w-full flex flex-col gap-2">
-      {#if locales.length > 0}
-        <LocaleContainer className="self-end">
-          {#each locales as { locale_code: code } (code)}
-            <Locale {code} />
+      {#if languages.length > 0}
+        <LanguageContainer className="self-end">
+          {#each languages as { language_id: id } (id)}
+            <Language code={`${id}`} />
           {/each}
-        </LocaleContainer>
+        </LanguageContainer>
       {/if}
       <div class="flex justify-between">
         <p>{new Date().toLocaleDateString()}</p>

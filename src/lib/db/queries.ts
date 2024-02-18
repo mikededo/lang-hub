@@ -6,46 +6,37 @@ import type { Tables } from '$lib/types';
 
 export const getProjectsQuery = supabaseClient
   .from('projects')
-  .select('*, locales:project_locales(*)');
+  .select('*, languages:v_project_languages(*)');
 export const getProjects = async () => (await getProjectsQuery.throwOnError()).data;
-export type ProjectsWithLocales = QueryData<typeof getProjectsQuery>;
-export type ProjectWithLocales = ProjectsWithLocales[0];
+export type ProjectsWithLanguages = QueryData<typeof getProjectsQuery>;
+export type ProjectWithLanguages = ProjectsWithLanguages[number];
 
 export const getProject = async (id: Tables<'projects'>['id']) =>
-  (await getProjectTranslations(id).throwOnError()).data;
+  (await getProjectWithPhrases(id).throwOnError()).data;
 
-export const getProjectTranslations = (id: number) =>
+export const getProjectWithPhrases = (id: number) =>
   supabaseClient
     .from('projects')
-    .select(
-      '*, locales:project_locales(is_default, locale:locales(*)), translations:v_translations_translated(*)',
-    )
+    .select('*, languages(*), phrases:v_phrase_translations(*)')
     .eq('id', id)
-    .single();
-export type ProjectWithTranslations = QueryData<ReturnType<typeof getProjectTranslations>>;
-
-export const createProjectTranslation = (
-  project: Tables<'projects'>['id'],
-  locales: Tables<'locales'>[],
-  key: Tables<'translations'>['translation_key'],
-) => {
-  const translations = locales.map(({ code }) => ({
-    project_id: project,
-    translation_key: key,
-    locale_code: code,
-    value: '',
-  }));
-
-  return supabaseClient.from('translations').insert(translations).select().throwOnError();
-};
-
-export const deleteProjectTranslation = (
-  project: Tables<'projects'>['id'],
-  key: Tables<'translations'>['translation_key'],
-) =>
-  supabaseClient
-    .from('translations')
-    .delete()
-    .eq('project_id', project)
-    .eq('translation_key', key)
+    .single()
     .throwOnError();
+export type ProjectWithPhrases = QueryData<ReturnType<typeof getProjectWithPhrases>>;
+
+export const getProjectPhrasesAndTranslations = (id: number) =>
+  supabaseClient
+    .from('phrase_translations')
+    .select('*, translations(id, translated_text, languages(id, code))')
+    .eq('project_id', id)
+    .throwOnError();
+export type PhrasesWithTranslations = QueryData<
+  ReturnType<typeof getProjectPhrasesAndTranslations>
+>;
+
+export const createProjectPhrase = (
+  project: Tables<'projects'>['id'],
+  key: Tables<'phrases'>['key'],
+) => supabaseClient.from('phrases').insert([{ project, key }]).select().throwOnError();
+
+export const deleteProjectTranslation = (key: Tables<'phrases'>['key']) =>
+  supabaseClient.from('phrases').delete().eq('key', key).throwOnError();
