@@ -23,8 +23,8 @@
     </a>
     {#if languages.length}
       <LanguageContainer>
-        {#each languages as { code }}
-          <Language {code} />
+        {#each languages as { code, is_default } (code)}
+          <Language {code} isDefault={is_default} />
         {/each}
       </LanguageContainer>
     {/if}

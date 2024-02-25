@@ -2,7 +2,7 @@
   import { twMerge } from 'tailwind-merge';
 
   export let isDefault: boolean | null = null;
-  export let code: string;
+  export let code: string | null;
 
   const classes = twMerge(
     'rounded-full bg-muted py-0.5 px-2 font-semibold',
@@ -10,6 +10,8 @@
   );
 </script>
 
-<p class={classes}>
-  {code.toUpperCase()}
-</p>
+{#if code}
+  <p class={classes}>
+    {code.toUpperCase()}
+  </p>
+{/if}

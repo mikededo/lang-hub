@@ -15,7 +15,6 @@
     PhrasesList,
     PhrasesListSkeleton,
   } from '$lib/domain/phrases';
-  import type { Tables } from '$lib/types';
 
   export let data: PageData;
 
@@ -25,8 +24,7 @@
   });
 
   $: projectId = $query.data?.id ?? 0;
-  $: languages =
-    $query.data?.languages.filter(Boolean).map((language) => language as Tables<'languages'>) ?? [];
+  $: languages = $query.data?.languages.filter(Boolean).map((language) => language) ?? [];
 
   const handleOnCreate = () => {
     const params = new URLSearchParams($page.url.searchParams.toString());

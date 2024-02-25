@@ -46,8 +46,8 @@
     <div class="text-xs w-full flex flex-col gap-2">
       {#if languages.length > 0}
         <LanguageContainer className="self-end">
-          {#each languages as { language_id: id } (id)}
-            <Language code={`${id}`} />
+          {#each languages as { code, is_default } (code)}
+            <Language {code} isDefault={is_default} />
           {/each}
         </LanguageContainer>
       {/if}

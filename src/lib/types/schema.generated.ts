@@ -84,6 +84,13 @@ export type Database = {
             foreignKeyName: "project_languages_language_fkey"
             columns: ["language_id"]
             isOneToOne: false
+            referencedRelation: "v_phrase_translations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_languages_language_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
             referencedRelation: "v_project_languages"
             referencedColumns: ["language_id"]
           },
@@ -151,6 +158,13 @@ export type Database = {
             foreignKeyName: "translations_language_fkey"
             columns: ["language_id"]
             isOneToOne: false
+            referencedRelation: "v_phrase_translations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "translations_language_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
             referencedRelation: "v_project_languages"
             referencedColumns: ["language_id"]
           },
@@ -172,7 +186,7 @@ export type Database = {
             foreignKeyName: "translations_phrase_fkey"
             columns: ["phrase_key"]
             isOneToOne: false
-            referencedRelation: "v_phrase_translations"
+            referencedRelation: "v_phrase_languages"
             referencedColumns: ["phrase_id"]
           }
         ]
@@ -197,13 +211,13 @@ export type Database = {
           }
         ]
       }
-      v_phrase_translations: {
+      v_phrase_languages: {
         Row: {
           default_text: string | null
           key: string | null
           phrase_id: number | null
           project_id: number | null
-          translation_count: number | null
+          translated_count: number | null
         }
         Relationships: [
           {
@@ -215,23 +229,24 @@ export type Database = {
           }
         ]
       }
+      v_phrase_translations: {
+        Row: {
+          code: string | null
+          id: number | null
+          name: string | null
+          phrase_key: string | null
+          translated_text: string | null
+        }
+        Relationships: []
+      }
       v_project_languages: {
         Row: {
           code: string | null
           is_default: boolean | null
           language_id: number | null
           name: string | null
-          project_id: number | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "project_languages_project_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
     }
     Functions: {

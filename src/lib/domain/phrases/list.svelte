@@ -12,7 +12,7 @@
   <h3 class="text-xl font-semibold">Phrases</h3>
   {#if phrases.length}
     <ol role="list" class="flex flex-col gap-2">
-      {#each phrases as { key, translation_count: count } (key)}
+      {#each phrases as { key, translated_count: count } (key)}
         {#if key}
           <PhraseItem phrase={key} translated={count} {languages} />
         {/if}
