@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ params, parent }) => {
   // Required in case the user navigates to the editor directly
   const { queryClient } = await parent();
   const phrases = await queryClient.ensureQueryData({
-    queryKey: Keys.PROJECT(projectId),
+    queryKey: Keys.PROJECT_PHRASES(projectId),
     queryFn: async () => await getProjectPhrasesAndTranslations(+projectId),
   });
 
