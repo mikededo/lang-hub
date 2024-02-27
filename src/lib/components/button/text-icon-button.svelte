@@ -20,6 +20,6 @@
 </script>
 
 <button {...$$restProps} class={classes} on:click>
-  <Icon class="w-4 h-4" />
+  <Icon class="h-4 w-4" />
   <span><slot /></span>
 </button>

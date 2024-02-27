@@ -21,13 +21,13 @@
   };
 </script>
 
-<div class="w-full p-4 flex gap-6 border rounded">
-  <div class="h-28 w-28 bg-muted shrink-0 rounded" />
-  <div class="flex flex-col w-full justify-between">
-    <div class="flex self-end items-center gap-1">
+<div class="flex w-full gap-6 rounded border p-4">
+  <div class="h-28 w-28 shrink-0 rounded bg-muted" />
+  <div class="flex w-full flex-col justify-between">
+    <div class="flex items-center gap-1 self-end">
       <a
         href={Paths.project(id)}
-        class="font-bold text-lg hover:underline"
+        class="text-lg font-bold hover:underline"
         on:mouseenter={handleOnPrefetchProject}
       >
         {name}
@@ -35,15 +35,15 @@
       {#if website}
         <a
           href={website}
-          class="hover:bg-muted rounded-sm transition-colors p-1 cursor-pointer"
+          class="cursor-pointer rounded-sm p-1 transition-colors hover:bg-muted"
           target="_blank"
           rel="noreferrer"
         >
-          <ExternalLink class="w-4 h-4" />
+          <ExternalLink class="h-4 w-4" />
         </a>
       {/if}
     </div>
-    <div class="text-xs w-full flex flex-col gap-2">
+    <div class="flex w-full flex-col gap-2 text-xs">
       {#if languages.length > 0}
         <LanguageContainer className="self-end">
           {#each languages as { code, is_default } (code)}

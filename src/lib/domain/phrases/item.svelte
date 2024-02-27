@@ -13,11 +13,11 @@
   const queryParams = { [QUERY_PARAM_KEYS.editorSelectedKey]: phrase };
 </script>
 
-<li class="px-4 py-3 flex justify-between border rounded">
+<li class="flex justify-between rounded border px-4 py-3">
   <div class="flex flex-col gap-2">
     <a
       href={Paths.editor($page.params.slug, { queryParams })}
-      class="font-semibold text-lg hover:underline hover:underline-offset-2"
+      class="text-lg font-semibold hover:underline hover:underline-offset-2"
     >
       {phrase}
     </a>
@@ -29,7 +29,7 @@
       </LanguageContainer>
     {/if}
   </div>
-  <div class="flex flex-col justify-between items-end gap-2">
+  <div class="flex flex-col items-end justify-between gap-2">
     <PhraseActions translationKey={phrase} />
     {#if typeof translated === 'number'}
       <p class="text-sm">Total locales translated: {translated}</p>

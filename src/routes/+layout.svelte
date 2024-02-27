@@ -13,10 +13,10 @@
 </script>
 
 <QueryClientProvider client={data.queryClient}>
-  <div class="w-full h-full">
+  <div class="h-full w-full">
     <header class="border-b">
-      <div class="flex gap-1 py-4 px-6 items-center justify-between">
-        <h1 class="font-bold text-xl flex-1">LangHub</h1>
+      <div class="flex items-center justify-between gap-1 px-6 py-4">
+        <h1 class="flex-1 text-xl font-bold">LangHub</h1>
         <IconButton Icon={Settings2} color="muted" />
         <IconButton Icon={Moon} color="muted" />
       </div>

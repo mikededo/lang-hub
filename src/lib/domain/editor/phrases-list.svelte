@@ -14,23 +14,23 @@
   const selectedClasses = 'border-primary bg-primary/10 text-primary hover:bg-primary/20';
 </script>
 
-<aside class="hidden lg:w-editor-aside lg:block border-r border-border shrink-0">
-  <div class="py-3 px-4 w-full">
+<aside class="hidden shrink-0 border-r border-border lg:block lg:w-editor-aside">
+  <div class="w-full px-4 py-3">
     <Input name="key" placeholder="Search keys" disabled={phrases.length === 0} />
   </div>
   {#if phrases.length === 0}
-    <p class="py-3 px-4 text-center">No keys found</p>
+    <p class="px-4 py-3 text-center">No keys found</p>
   {:else}
     <div role="list" class="md:flex-col md:gap-[1px]">
       {#each phrases as { key, translation_count: count } (key)}
         <a
           class={twMerge(
-            'py-3 px-4 flex gap-2 border-y border-transparent hover:bg-muted transition-colors cursor-pointer',
+            'flex cursor-pointer gap-2 border-y border-transparent px-4 py-3 transition-colors hover:bg-muted',
             selectedKey === key && selectedClasses,
           )}
           href="?{QUERY_PARAM_KEYS.editorSelectedKey}={key}"
         >
-          <CheckCircle2 class="w-4 h-4 mt-0.5" />
+          <CheckCircle2 class="mt-0.5 h-4 w-4" />
           <div class="flex flex-col">
             <p class="text-sm font-semibold">
               {key}

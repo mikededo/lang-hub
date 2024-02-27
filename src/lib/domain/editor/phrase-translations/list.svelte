@@ -4,21 +4,21 @@
   export let translations: PhraseTranslations;
 </script>
 
-<ol class="p-2 flex flex-col gap-[1px]">
+<ol class="flex flex-col gap-[1px] p-2">
   {#each translations as { id, translated_text: text, name: languageName } (id)}
-    <li class="p-2 rounded hover:bg-muted flex flex-col gap-1 cursor-pointer">
+    <li class="flex cursor-pointer flex-col gap-1 rounded p-2 hover:bg-muted">
       <div class="flex justify-between">
         <span class="text-sm font-semibold">{languageName}</span>
         <!-- TODO: Extract into component - Chip -->
         {#if text}
           <p
-            class="text-[10px] flex items-center px-2 py-[1px] bg-primary text-primary-foreground rounded-full"
+            class="flex items-center rounded-full bg-primary px-2 py-[1px] text-[10px] text-primary-foreground"
           >
             Translated
           </p>
         {:else}
           <p
-            class="text-[10px] flex items-center px-2 py-[1px] bg-muted text-muted-foreground rounded-full"
+            class="flex items-center rounded-full bg-muted px-2 py-[1px] text-[10px] text-muted-foreground"
           >
             Untranslated
           </p>

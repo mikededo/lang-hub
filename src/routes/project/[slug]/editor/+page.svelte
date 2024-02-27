@@ -34,18 +34,18 @@
 
 <div class="flex flex-col">
   <Header projectId={data.projectId} />
-  <div class="min-h-editor w-full flex">
+  <div class="flex min-h-editor w-full">
     <PhrasesList phrases={$phrasesQuery.data ?? []} />
-    <section class="w-full flex p-4">
+    <section class="flex w-full p-4">
       {#if !selectedKey}
-        <div class="w-full bg-muted/50 rounded h-full flex items-center justify-center">
+        <div class="flex h-full w-full items-center justify-center rounded bg-muted/50">
           <p>Select a translation to start editing!</p>
         </div>
       {:else}
-        <div class="w-full border rounded h-full flex items-center justify-center"></div>
+        <div class="flex h-full w-full items-center justify-center rounded border"></div>
       {/if}
     </section>
-    <aside class="w-editor-aside border-l border-border shrink-0">
+    <aside class="w-editor-aside shrink-0 border-l border-border">
       <EditorCollapsible title="Languages">
         {#if $phraseQuery.isLoading}
           <PhraseTranslationsSkeleton />

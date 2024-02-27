@@ -1,15 +1,15 @@
-<div class="w-full p-4 flex gap-4 border rounded animate-pulse">
-  <div class="h-28 w-28 bg-muted rounded shrink-0" />
-  <div class="flex flex-col w-full justify-between">
-    <div class="h-6 w-48 rounded bg-muted self-end" />
-    <div class="text-xs w-full flex flex-col gap-1.5">
+<div class="flex w-full animate-pulse gap-4 rounded border p-4">
+  <div class="h-28 w-28 shrink-0 rounded bg-muted" />
+  <div class="flex w-full flex-col justify-between">
+    <div class="h-6 w-48 self-end rounded bg-muted" />
+    <div class="flex w-full flex-col gap-1.5 text-xs">
       <div class="flex gap-1 self-end">
-        <div class="rounded-full bg-muted h-5 w-6 py-0.5 px-2" />
-        <div class="rounded-full bg-muted h-5 w-6 py-0.5 px-2" />
+        <div class="h-5 w-6 rounded-full bg-muted px-2 py-0.5" />
+        <div class="h-5 w-6 rounded-full bg-muted px-2 py-0.5" />
       </div>
       <div class="flex justify-between text-sm">
-        <div class="rounded-full bg-muted h-5 w-12 py-0.5 px-2" />
-        <div class="rounded-full bg-muted h-5 w-24 py-0.5 px-2" />
+        <div class="h-5 w-12 rounded-full bg-muted px-2 py-0.5" />
+        <div class="h-5 w-24 rounded-full bg-muted px-2 py-0.5" />
       </div>
     </div>
   </div>

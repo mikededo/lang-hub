@@ -9,17 +9,17 @@
 </script>
 
 <!-- TODO: Extract into component  -->
-<div class="w-full flex border-b">
-  <aside class="hidden lg:w-editor-aside lg:block border-r border-border shrink-0 p-3">
+<div class="flex w-full border-b">
+  <aside class="hidden shrink-0 border-r border-border p-3 lg:block lg:w-editor-aside">
     <a
-      class="flex items-center gap-1.5 text-sm font-semibold py-1 px-2 rounded-full cursor-pointer transition-colors hover:bg-muted w-fit"
+      class="flex w-fit cursor-pointer items-center gap-1.5 rounded-full px-2 py-1 text-sm font-semibold transition-colors hover:bg-muted"
       href={Paths.project(projectId)}
     >
-      <ArrowLeftIcon class="w-4 h-4" strokeWidth={3} />
+      <ArrowLeftIcon class="h-4 w-4" strokeWidth={3} />
       <span>Go back</span>
     </a>
   </aside>
-  <section class="w-full flex gap-2 items-center px-4 py-3">
+  <section class="flex w-full items-center gap-2 px-4 py-3">
     <IconButton
       class="lg:hidden"
       Icon={ArrowLeftIcon}
@@ -27,7 +27,7 @@
       strokeWidth={2.5}
       href={Paths.project(projectId)}
     />
-    <h2 class="text-2xl font-bold flex-1">Editor</h2>
+    <h2 class="flex-1 text-2xl font-bold">Editor</h2>
     <div>
       <CreatePhraseButton />
     </div>

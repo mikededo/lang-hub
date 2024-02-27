@@ -7,16 +7,16 @@
   export let onClose: (() => void) | undefined = undefined;
 </script>
 
-<div role="presentation" class="fixed bg-black/50 inset-0" transition:fade={{ duration: 200 }} />
+<div role="presentation" class="fixed inset-0 bg-black/50" transition:fade={{ duration: 200 }} />
 <div
   role="dialog"
   class="fixed inset-0 z-50 flex items-center justify-center"
   transition:fade={{ duration: 200 }}
 >
   <div
-    class="max-w-lg min-w-[480px] min-h-fit rounded bg-white px-8 py-6 shadow-lg flex flex-col gap-4 w-full"
+    class="flex min-h-fit w-full min-w-[480px] max-w-lg flex-col gap-4 rounded bg-white px-8 py-6 shadow-lg"
   >
-    <div class="flex justify-between items-center w-full">
+    <div class="flex w-full items-center justify-between">
       <h2 class="text-2xl font-semibold">
         <slot name="header" />
       </h2>

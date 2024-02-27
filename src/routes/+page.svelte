@@ -24,7 +24,7 @@
   };
 </script>
 
-<Container class="w-full h-full">
+<Container class="h-full w-full">
   {#if $query.isLoading}
     <ProjectsGrid>
       <ProjectSkeleton />
