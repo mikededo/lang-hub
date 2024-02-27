@@ -3,6 +3,7 @@
   import { twMerge } from 'tailwind-merge';
 
   import { page } from '$app/stores';
+  import { Input } from '$lib/components';
   import { QUERY_PARAM_KEYS } from '$lib/config';
   import type { PhrasesWithTranslations } from '$lib/db';
 
@@ -15,12 +16,7 @@
 
 <aside class="hidden lg:w-editor-aside lg:block border-r border-border shrink-0">
   <div class="py-3 px-4 w-full">
-    <input
-      name="key"
-      placeholder="Search keys"
-      class="h-10 w-full ring ring-transparent border transition-all focus:ring-offset-white focus:ring-offset-2 focus:ring-primary rounded px-3 py-1 outline-none"
-      disabled={phrases.length === 0}
-    />
+    <Input name="key" placeholder="Search keys" disabled={phrases.length === 0} />
   </div>
   {#if phrases.length === 0}
     <p class="py-3 px-4 text-center">No keys found</p>

@@ -3,6 +3,7 @@
 
   import { IconButton } from '$lib/components';
   import { Paths } from '$lib/config';
+  import { CreatePhraseButton } from '$lib/domain/phrases';
 
   export let projectId: string;
 </script>
@@ -26,6 +27,9 @@
       strokeWidth={2.5}
       href={Paths.project(projectId)}
     />
-    <h2 class="text-2xl font-bold">Editor</h2>
+    <h2 class="text-2xl font-bold flex-1">Editor</h2>
+    <div>
+      <CreatePhraseButton />
+    </div>
   </section>
 </div>

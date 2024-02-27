@@ -1,20 +1,13 @@
 <script lang="ts">
   import { createQuery } from '@tanstack/svelte-query';
-  import { ArrowLeftIcon, FilePlus2 } from 'lucide-svelte';
+  import { ArrowLeftIcon } from 'lucide-svelte';
 
   import type { PageData } from './$types';
 
-  import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
-  import { Container, TextIconButton } from '$lib/components';
-  import { Keys, Paths, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
+  import { Container } from '$lib/components';
+  import { Keys, Paths } from '$lib/config';
   import { getProject } from '$lib/db';
-  import {
-    CreatePhraseDialog,
-    DeletePhraseDialog,
-    PhrasesList,
-    PhrasesListSkeleton,
-  } from '$lib/domain/phrases';
+  import { CreatePhraseButton, PhrasesList, PhrasesListSkeleton } from '$lib/domain/phrases';
 
   export let data: PageData;
 
@@ -23,14 +16,7 @@
     queryFn: async () => await getProject(+data.slug),
   });
 
-  $: projectId = $query.data?.id ?? 0;
   $: languages = $query.data?.languages.filter(Boolean).map((language) => language) ?? [];
-
-  const handleOnCreate = () => {
-    const params = new URLSearchParams($page.url.searchParams.toString());
-    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.create);
-    goto(`${$page.url.pathname}?${params.toString()}`);
-  };
 </script>
 
 <Container class="flex flex-col gap-2">
@@ -51,7 +37,7 @@
       {:else if $query.data}
         <h2 class="text-4xl font-bold">{$query.data.name}</h2>
       {/if}
-      <TextIconButton Icon={FilePlus2} on:click={handleOnCreate}>Add translation</TextIconButton>
+      <CreatePhraseButton />
     </div>
     {#if $query.isLoading}
       <PhrasesListSkeleton />
@@ -60,6 +46,3 @@
     {/if}
   </div>
 </Container>
-
-<CreatePhraseDialog {projectId} />
-<DeletePhraseDialog {projectId} />

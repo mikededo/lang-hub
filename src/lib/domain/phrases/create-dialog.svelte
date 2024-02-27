@@ -3,7 +3,7 @@
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { Button, Dialog } from '$lib/components';
+  import { Button, Dialog, Input } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { createProjectPhrase } from '$lib/db';
   import type { Tables } from '$lib/types';
@@ -45,16 +45,7 @@
 {#if showDialog}
   <Dialog onClose={handleOnClose}>
     <span slot="header">Create a translation</span>
-    <div class="flex flex-col gap-1">
-      <label for="key" class="text-xs font-semibold uppercase">Key</label>
-      <input
-        name="key"
-        placeholder="Unique phrase key..."
-        bind:value={key}
-        class="h-10 ring ring-transparent border transition-all focus:ring-offset-white focus:ring-offset-2 focus:ring-primary rounded px-3 py-1 outline-none"
-      />
-    </div>
-
+    <Input label="Key" name="key" placeholder="Unique phrase key..." bind:value={key} />
     <div class="flex items-center justify-end gap-2">
       <Button disabled={!key} on:click={handleOnCreate}>Create</Button>
       <Button color="secondary" on:click={handleOnClose}>Cancel</Button>
