@@ -1,8 +1,10 @@
 <script lang="ts">
   import { twMerge } from 'tailwind-merge';
 
+  // TODO: Replace with $$restProps
   export let className: string | undefined = undefined;
   export let disabled: boolean | undefined = undefined;
+  export let id: string | undefined = undefined;
   export let name: string | undefined = undefined;
   export let placeholder: string | undefined = undefined;
   export let label: string | undefined = undefined;
@@ -14,9 +16,9 @@
   );
 </script>
 
-<div class="flex flex-col gap-1">
+<div class="flex w-full flex-col items-start gap-2">
   {#if label}
     <label for={name} class="text-xs font-semibold uppercase">{label}</label>
   {/if}
-  <input {name} {placeholder} {disabled} class={classes} {value} />
+  <input {id} {name} {placeholder} {disabled} class={classes} {value} {...$$restProps} />
 </div>

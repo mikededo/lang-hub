@@ -20,6 +20,6 @@
 </script>
 
 <button {...$$restProps} class={classes} on:click>
-  <Icon class="h-4 w-4" />
+  <svelte:component this={Icon} class="h-4 w-4" />
   <span><slot /></span>
 </button>

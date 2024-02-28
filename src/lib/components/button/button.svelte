@@ -6,7 +6,7 @@
 
   export let variant: ButtonVariant = 'default';
   export let color: ButtonColor = 'primary';
-  // TODO: CHange for $$props.class
+  // TODO: Change for $$props.class
   export let className = '';
 
   const classes = sharedClasses({
