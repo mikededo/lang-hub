@@ -9,8 +9,7 @@
   import { Button, Input } from '$lib/components';
   import { EMAIL_REGEX, PASSWORD_REGEX } from '$lib/config';
   import { signInUser } from '$lib/db';
-
-  type FormFields = { email: string; password: string };
+  import type { SignInData } from '$lib/db';
 
   export let data: PageData;
 
@@ -19,7 +18,7 @@
   let validPassword = true;
 
   const mutation = createMutation({
-    mutationFn: async ({ email, password }: FormFields) =>
+    mutationFn: async ({ email, password }: SignInData) =>
       await signInUser(supabaseClient, email, password),
     onSuccess: () => {
       goto('/');
@@ -28,7 +27,7 @@
 
   const handleOnSubmit = (e: Event) => {
     const form = e.target as HTMLFormElement;
-    const { email, password } = Object.fromEntries(new FormData(form)) as FormFields;
+    const { email, password } = Object.fromEntries(new FormData(form)) as SignInData;
 
     validEmail = EMAIL_REGEX.test(email);
     validPassword = PASSWORD_REGEX.test(password);

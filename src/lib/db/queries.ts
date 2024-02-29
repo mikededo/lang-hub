@@ -15,7 +15,8 @@ const withUnauthorizedRedirect = async <T>(
   response: PostgrestSingleResponse<T>,
 ) => {
   if (response.error && response.status >= 400 && response.status < 500) {
-    // await client.auth.signOut();
+    await client.auth.signOut();
+
     if (isBrowser()) {
       goto('/auth');
     } else {
@@ -26,8 +27,12 @@ const withUnauthorizedRedirect = async <T>(
 };
 
 // AUTH
+export type SignInData = { email: string; password: string };
+export type SignUpData = { firstName: string; lastName: string } & SignInData;
 export const signInUser = async (client: Client, email: string, password: string) =>
   await client.auth.signInWithPassword({ email, password });
+export const signUpUser = async (client: Client, { email, password, ...rest }: SignUpData) =>
+  await client.auth.signUp({ email, password, options: { data: rest } });
 
 // PROJECTS
 export const getProjectsQuery = (client: Client) =>
