@@ -58,6 +58,14 @@ export const getPhraseTranslations = async (client: Client, key: string) =>
   (await withUnauthorizedRedirect(client, await getPhraseTranslationsQuery(client, key))).data;
 export type PhraseTranslations = Result<typeof getPhraseTranslationsQuery>;
 
+/* MUTATIONS */
+
+// PROJECTS
+export type ProjectData = { name: string; website?: string };
+export const createProject = async (client: Client, data: ProjectData) =>
+  (await client.rpc('create_project', data).throwOnError()).data;
+
+// PHRASES
 export const createProjectPhrase = async (
   client: Client,
   project: Tables<'projects'>['id'],

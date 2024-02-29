@@ -9,7 +9,7 @@
 
   export let onPrefetch: ((id: ProjectWithLanguages['id']) => void) | undefined = undefined;
   export let project: ProjectWithLanguages;
-  const { id, name, website_url: website, languages } = project;
+  const { id, name, website_url: website, languages, last_updated } = project;
 
   const handleOnPrefetchProject = () => {
     if (didPrefetch) {
@@ -21,8 +21,8 @@
   };
 </script>
 
-<div class="flex w-full gap-6 rounded border p-4">
-  <div class="h-28 w-28 shrink-0 rounded bg-muted" />
+<div class="flex h-40 w-full gap-6 rounded border p-4">
+  <div class="h-24 w-24 shrink-0 rounded bg-muted" />
   <div class="flex w-full flex-col justify-between">
     <div class="flex items-center gap-1 self-end">
       <a
@@ -51,9 +51,11 @@
           {/each}
         </LanguageContainer>
       {/if}
-      <div class="flex justify-between">
-        <p>{new Date().toLocaleDateString()}</p>
+      <div class="flex flex-col items-end">
         <p>90% translated</p>
+        {#if last_updated}
+          <p>Last updated: {new Date(last_updated).toLocaleDateString()}</p>
+        {/if}
       </div>
     </div>
   </div>

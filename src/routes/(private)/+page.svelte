@@ -7,7 +7,13 @@
   import { Keys } from '$lib/config';
   import type { ProjectWithLanguages } from '$lib/db';
   import { getProject, getProjects } from '$lib/db';
-  import { ProjectCard, ProjectSkeleton, ProjectsGrid } from '$lib/domain/project';
+  import {
+    CreateProjectCard,
+    CreateProjectDialog,
+    ProjectCard,
+    ProjectSkeleton,
+    ProjectsGrid,
+  } from '$lib/domain/project';
 
   export let data: PageData;
   const { queryClient, supabaseClient } = data;
@@ -41,6 +47,8 @@
       {#each $query.data as project (project.id)}
         <ProjectCard {project} onPrefetch={handleOnPrefetch} />
       {/each}
+      <CreateProjectCard />
     </ProjectsGrid>
   {/if}
 </Container>
+<CreateProjectDialog {supabaseClient} />

@@ -8,7 +8,7 @@
 
   const handleOnCreate = () => {
     const params = new URLSearchParams($page.url.searchParams.toString());
-    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.create);
+    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.createPhrase);
     goto(`${$page.url.pathname}?${params.toString()}`);
   };
 </script>

@@ -21,5 +21,5 @@
   {#if label}
     <label for={name} class="text-xs font-semibold uppercase">{label}</label>
   {/if}
-  <input {id} {name} {placeholder} {disabled} class={classes} {value} {...$$restProps} />
+  <input {id} {name} {placeholder} {disabled} class={classes} bind:value {...$$restProps} />
 </div>

@@ -16,7 +16,8 @@
 
   $: searchParams = $page.url.searchParams;
   $: showDialog =
-    searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.create && projectId;
+    searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.createPhrase &&
+    projectId;
 
   const queryClient = useQueryClient();
   const mutation = createMutation({

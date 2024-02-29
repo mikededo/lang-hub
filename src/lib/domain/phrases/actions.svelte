@@ -10,7 +10,7 @@
 
   const handleOnDelete = () => {
     const params = new URLSearchParams($page.url.searchParams.toString());
-    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.delete);
+    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.deletePhrase);
     params.set(QUERY_PARAM_KEYS.translationKey, translationKey);
 
     goto(`${$page.url.pathname}?${params.toString()}`);

@@ -20,7 +20,7 @@
   $: searchParams = $page.url.searchParams;
   $: phraseKey = searchParams.get(QUERY_PARAM_KEYS.translationKey);
   $: showDialog =
-    searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.delete &&
+    searchParams.get(QUERY_PARAM_KEYS.dialog) === QUERY_PARAM_VALUES.dialog.deletePhrase &&
     phraseKey &&
     projectId;
 
