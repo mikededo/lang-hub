@@ -1,10 +1,13 @@
 <script lang="ts">
-  import { Moon, Settings2 } from 'lucide-svelte';
+  import { LogOut, Moon, UserRound } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
 
-  import { afterNavigate } from '$app/navigation';
-  import { IconButton } from '$lib/components';
+  import type { LayoutData } from './$types';
 
+  import { afterNavigate, goto } from '$app/navigation';
+  import { ButtonMenu, IconButton, MenuItem } from '$lib/components';
+
+  export let data: LayoutData;
   let fromAuth = false;
 
   afterNavigate(({ from }) => {
@@ -15,13 +18,21 @@
       }, 1500);
     }
   });
+
+  const handleOnLogOut = async () => {
+    await data.supabaseClient.auth.signOut();
+    goto('/auth/sign-in');
+  };
 </script>
 
 <div class="h-full w-full" in:fade={{ delay: 2500 }}>
   <header class="border-b">
     <div class="flex items-center justify-between gap-1 px-6 py-4">
       <h1 class="flex-1 text-xl font-bold">LangHub</h1>
-      <IconButton Icon={Settings2} color="muted" />
+      <ButtonMenu>
+        <MenuItem Icon={UserRound}>Your profile</MenuItem>
+        <MenuItem Icon={LogOut} on:click={handleOnLogOut} destructive>Sign out</MenuItem>
+      </ButtonMenu>
       <IconButton Icon={Moon} color="muted" />
     </div>
   </header>

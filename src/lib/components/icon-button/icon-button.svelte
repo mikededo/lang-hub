@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { AnyMeltElement } from '@melt-ui/svelte';
+  import { emptyMeltElement, melt } from '@melt-ui/svelte';
   import type { IconProps, Icon as LucideIcon } from 'lucide-svelte';
   import type { ComponentType } from 'svelte';
   import { twMerge } from 'tailwind-merge';
@@ -11,6 +13,7 @@
   export let color: IconButtonColor = 'primary';
   export let href: string | undefined = undefined;
   export let strokeWidth: IconProps['strokeWidth'] = undefined;
+  export let meltElement: AnyMeltElement | undefined = undefined;
 
   const iconWrapperClasses =
     'h-8 w-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors cursor-pointer';
@@ -31,10 +34,17 @@
     muted: 'hover:bg-muted stroke-foreground',
     destructive: 'hover:bg-destructive/10 stroke-destructive',
   };
+
+  $: element = meltElement ?? emptyMeltElement;
 </script>
 
 {#if href}
-  <a {...$$restProps} class={twMerge(iconWrapperClasses, colors[color], $$restProps.class)} {href}>
+  <a
+    {...$$restProps}
+    class={twMerge(iconWrapperClasses, colors[color], $$restProps.class)}
+    {href}
+    use:melt={$element}
+  >
     <svelte:component
       this={Icon}
       class={twMerge(iconSizes[size], 'stroke-inherit')}
@@ -46,6 +56,7 @@
     {...$$restProps}
     class={twMerge(iconWrapperClasses, colors[color], $$restProps.class)}
     on:click
+    use:melt={$element}
   >
     <svelte:component
       this={Icon}
