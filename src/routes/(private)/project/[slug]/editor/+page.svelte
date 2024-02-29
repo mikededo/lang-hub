@@ -6,7 +6,7 @@
   import { page } from '$app/stores';
   import { EditorCollapsible } from '$lib/components/collapsible';
   import { Keys, QUERY_PARAM_KEYS } from '$lib/config';
-  import { getPhraseTranslations, getProjectPhrasesAndTranslations } from '$lib/db';
+  import { getPhraseTranslations, getProject } from '$lib/db';
   import {
     Header,
     PhraseTranslationsList,
@@ -15,17 +15,18 @@
   } from '$lib/domain/editor';
 
   export let data: PageData;
-  const phrasesQuery = createQuery({
-    queryKey: Keys.PROJECT_PHRASES(data.projectId),
-    queryFn: async () => await getProjectPhrasesAndTranslations(+data.projectId),
+  const { projectId, supabaseClient } = data;
+  let projectQuery = createQuery({
+    queryKey: Keys.PROJECT(projectId),
+    queryFn: async () => await getProject(supabaseClient, +projectId),
   });
 
   $: selectedKey = $page.url.searchParams.get(QUERY_PARAM_KEYS.editorSelectedKey);
   $: phraseQuery = createQuery({
-    queryKey: Keys.PROJECT_PHRASE(data.projectId, selectedKey!),
+    queryKey: Keys.PROJECT_PHRASE(projectId, selectedKey!),
     queryFn: async () => {
       if (selectedKey) {
-        return await getPhraseTranslations(selectedKey);
+        return await getPhraseTranslations(supabaseClient, selectedKey);
       }
     },
     enabled: !!selectedKey,
@@ -33,9 +34,9 @@
 </script>
 
 <div class="flex flex-col">
-  <Header projectId={data.projectId} />
+  <Header {projectId} />
   <div class="flex min-h-editor w-full">
-    <PhrasesList phrases={$phrasesQuery.data ?? []} />
+    <PhrasesList phrases={$projectQuery.data?.phrases ?? []} />
     <section class="flex w-full p-4">
       {#if !selectedKey}
         <div class="flex h-full w-full items-center justify-center rounded bg-muted/50">

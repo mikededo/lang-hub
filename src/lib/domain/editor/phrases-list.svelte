@@ -5,9 +5,9 @@
   import { page } from '$app/stores';
   import { Input } from '$lib/components';
   import { QUERY_PARAM_KEYS } from '$lib/config';
-  import type { PhrasesWithTranslations } from '$lib/db';
+  import type { ProjectWithPhrases } from '$lib/db';
 
-  export let phrases: PhrasesWithTranslations;
+  export let phrases: ProjectWithPhrases['phrases'];
 
   $: selectedKey = $page.url.searchParams.get(QUERY_PARAM_KEYS.editorSelectedKey);
 
@@ -22,7 +22,7 @@
     <p class="px-4 py-3 text-center">No keys found</p>
   {:else}
     <div role="list" class="md:flex-col md:gap-[1px]">
-      {#each phrases as { key, translation_count: count } (key)}
+      {#each phrases as { key, translated_count: count } (key)}
         <a
           class={twMerge(
             'flex cursor-pointer gap-2 border-y border-transparent px-4 py-3 transition-colors hover:bg-muted',

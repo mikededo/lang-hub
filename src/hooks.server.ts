@@ -1,15 +1,35 @@
-import type { Handle } from '@sveltejs/kit';
-import { redirect } from '@sveltejs/kit';
+import { createServerClient } from '@supabase/ssr';
+import { type Handle } from '@sveltejs/kit';
+
+import type { Database } from '$lib/types';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  const cookiesUser = event.cookies.get('user');
-  if (!cookiesUser && !event.url.pathname.includes('/auth')) {
-    throw redirect(302, '/auth/sign-in');
-  }
+  event.locals.supabase = createServerClient<Database>(
+    import.meta.env.LANG_HUB_SUPABASE_URL,
+    import.meta.env.LANG_HUB_SUPABASE_KEY,
+    {
+      cookies: {
+        get: (key) => event.cookies.get(key),
+        set: (key, value, options) => {
+          event.cookies.set(key, value, { ...options, path: '/' });
+        },
+        remove: (key, options) => {
+          event.cookies.delete(key, { ...options, path: '/' });
+        },
+      },
+    },
+  );
 
-  // TODO: Add logic for user
+  event.locals.getUserSession = async () => {
+    const {
+      data: { session },
+    } = await event.locals.supabase.auth.getSession();
+    return session;
+  };
 
-  const response = await resolve(event);
-
-  return response;
+  return resolve(event, {
+    filterSerializedResponseHeaders(name) {
+      return name === 'content-range';
+    },
+  });
 };

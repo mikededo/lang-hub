@@ -6,6 +6,23 @@
   export let data: LayoutServerData;
 </script>
 
+<svelte:head>
+  <title>Authentication | Lang Hub</title>
+  <meta name="description" content="Sign in or sign up to access your Lang Hub account" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-title" content="Lang Hub" />
+  <meta name="application-name" content="Lang Hub" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="TBD" />
+  <meta property="og:title" content="Authentication | Lang Hub" />
+  <meta property="og:description" content="Sign in or sign up to access your Lang Hub account" />
+  <meta property="og:image" content="TBD" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+</svelte:head>
+
 <main>
   <div class="fixed left-0 top-0 -z-10 h-full w-full">
     <div

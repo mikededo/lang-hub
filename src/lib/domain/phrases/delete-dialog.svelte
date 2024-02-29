@@ -6,14 +6,15 @@
   import { DangerDialog } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { deleteProjectTranslation } from '$lib/db';
-  import type { ProjectWithPhrases } from '$lib/db';
+  import type { Client, ProjectWithPhrases } from '$lib/db';
   import type { Tables } from '$lib/types';
 
   export let projectId: Tables<'phrases'>['project'];
+  export let supabaseClient: Client;
 
   const queryClient = useQueryClient();
   const mutation = createMutation({
-    mutationFn: async (key: string) => await deleteProjectTranslation(key),
+    mutationFn: async (key: string) => await deleteProjectTranslation(supabaseClient, key),
   });
 
   $: searchParams = $page.url.searchParams;

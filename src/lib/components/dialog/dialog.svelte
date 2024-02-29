@@ -7,11 +7,11 @@
   export let onClose: (() => void) | undefined = undefined;
 </script>
 
-<div role="presentation" class="fixed inset-0 bg-black/50" transition:fade={{ duration: 200 }} />
+<div role="presentation" class="fixed inset-0 bg-black/50" transition:fade={{ duration: 150 }} />
 <div
   role="dialog"
   class="fixed inset-0 z-50 flex items-center justify-center"
-  transition:fade={{ duration: 200 }}
+  transition:fade={{ duration: 150 }}
 >
   <div
     class="flex min-h-fit w-full min-w-[480px] max-w-lg flex-col gap-4 rounded bg-white px-8 py-6 shadow-lg"

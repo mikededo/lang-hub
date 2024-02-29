@@ -6,9 +6,11 @@
   import { Button, Dialog, Input } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
   import { createProjectPhrase } from '$lib/db';
+  import type { Client } from '$lib/db';
   import type { Tables } from '$lib/types';
 
   export let projectId: Tables<'projects'>['id'];
+  export let supabaseClient: Client;
 
   let key: string;
 
@@ -18,7 +20,7 @@
 
   const queryClient = useQueryClient();
   const mutation = createMutation({
-    mutationFn: async () => await createProjectPhrase(projectId, key),
+    mutationFn: async () => await createProjectPhrase(supabaseClient, projectId, key),
   });
 
   const handleOnClose = () => {

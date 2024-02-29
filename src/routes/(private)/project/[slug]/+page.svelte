@@ -10,10 +10,11 @@
   import { CreatePhraseButton, PhrasesList, PhrasesListSkeleton } from '$lib/domain/phrases';
 
   export let data: PageData;
+  const { slug, supabaseClient } = data;
 
-  const query = createQuery({
-    queryKey: Keys.PROJECT(data.slug),
-    queryFn: async () => await getProject(+data.slug),
+  let query = createQuery({
+    queryKey: Keys.PROJECT(slug),
+    queryFn: async () => await getProject(supabaseClient, +slug),
   });
 
   $: languages = $query.data?.languages.filter(Boolean).map((language) => language) ?? [];

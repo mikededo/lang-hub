@@ -10,16 +10,17 @@
   import { ProjectCard, ProjectSkeleton, ProjectsGrid } from '$lib/domain/project';
 
   export let data: PageData;
+  const { queryClient, supabaseClient } = data;
 
   const query = createQuery({
     queryKey: Keys.PROJECTS,
-    queryFn: getProjects,
+    queryFn: () => getProjects(supabaseClient),
   });
 
   const handleOnPrefetch = (id: ProjectWithLanguages['id']) => {
-    data.queryClient.prefetchQuery({
+    queryClient.prefetchQuery({
       queryKey: Keys.PROJECT(`${id}`),
-      queryFn: async () => await getProject(id),
+      queryFn: async () => await getProject(supabaseClient, id),
     });
   };
 </script>

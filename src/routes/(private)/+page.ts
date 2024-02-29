@@ -4,10 +4,10 @@ import { Keys } from '$lib/config';
 import { getProjects } from '$lib/db';
 
 export const load: PageLoad = async ({ parent }) => {
-  const { queryClient } = await parent();
+  const { queryClient, supabaseClient } = await parent();
 
-  await queryClient.prefetchQuery({
+  queryClient.prefetchQuery({
     queryKey: Keys.PROJECTS,
-    queryFn: getProjects,
+    queryFn: () => getProjects(supabaseClient),
   });
 };
