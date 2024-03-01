@@ -3,10 +3,9 @@
 
   import { Button } from '$lib/components';
   import { pathTo } from '$lib/config';
+  import { Pricing } from '$lib/domain/landing';
 
   export let data: PageData;
-  console.log({ session: data.session });
-  console.log(data.session ? pathTo('app') : pathTo('signUp'));
 </script>
 
 <header class="w-full bg-gray-50/90 pb-12 pt-8 md:py-24">
@@ -90,9 +89,19 @@
             Organize your localization projects in projects, by teams.
           </p>
         </div>
+        <div
+          class="rounded border border-transparent p-4 transition-colors hover:border-border hover:bg-muted"
+        >
+          <h3 class="text-lg font-bold">Real-time Updates</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Stay informed with instant notifications about project changes and updates. Never miss
+            an important update.
+          </p>
+        </div>
       </div>
     </div>
   </section>
+  <Pricing />
   <!-- Add mock reviews --->
 </main>
 <footer class="bg-gray-900 text-gray-300">

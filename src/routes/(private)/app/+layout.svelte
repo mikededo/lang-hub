@@ -26,7 +26,7 @@
   };
 </script>
 
-<div class="h-full w-full" in:fade={{ delay: 2500 }}>
+<div class="h-full w-full" in:fade={{ delay: fromAuth ? 2500 : 0 }}>
   <header class="border-b">
     <div class="flex items-center justify-between gap-1 px-6 py-4">
       <h1 class="flex-1 text-xl font-bold">LangHub</h1>
