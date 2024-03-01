@@ -7,7 +7,7 @@
 
   import { goto } from '$app/navigation';
   import { Button, Input } from '$lib/components';
-  import { EMAIL_REGEX, PASSWORD_REGEX } from '$lib/config';
+  import { EMAIL_REGEX, PASSWORD_REGEX, pathTo } from '$lib/config';
   import { signInUser } from '$lib/db';
   import type { SignInData } from '$lib/db';
 
@@ -21,7 +21,7 @@
     mutationFn: async ({ email, password }: SignInData) =>
       await signInUser(supabaseClient, email, password),
     onSuccess: () => {
-      goto('/');
+      goto(pathTo('app'));
     },
   });
 
@@ -81,7 +81,7 @@
   <div class="space-y-2 text-sm">
     <p>
       Don't have an account?
-      <a class="underline" href="/auth/sign-up">Sign up</a>
+      <a class="underline" href={pathTo('signUp')}>Sign up</a>
     </p>
   </div>
 </form>

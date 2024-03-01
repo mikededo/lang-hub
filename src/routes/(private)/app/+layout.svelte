@@ -6,12 +6,13 @@
 
   import { afterNavigate, goto } from '$app/navigation';
   import { ButtonMenu, IconButton, MenuItem } from '$lib/components';
+  import { isAuthRelated, pathTo } from '$lib/config';
 
   export let data: LayoutData;
   let fromAuth = false;
 
   afterNavigate(({ from }) => {
-    if (from?.url.pathname.startsWith('/auth')) {
+    if (isAuthRelated(from?.url.pathname)) {
       fromAuth = true;
       setTimeout(() => {
         fromAuth = false;
@@ -21,7 +22,7 @@
 
   const handleOnLogOut = async () => {
     await data.supabaseClient.auth.signOut();
-    goto('/auth/sign-in');
+    goto(pathTo('signIn'));
   };
 </script>
 

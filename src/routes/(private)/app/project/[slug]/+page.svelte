@@ -5,7 +5,7 @@
   import type { PageData } from './$types';
 
   import { Container } from '$lib/components';
-  import { Keys, Paths } from '$lib/config';
+  import { Keys, pathTo } from '$lib/config';
   import { getProject } from '$lib/db';
   import { CreatePhraseButton, PhrasesList, PhrasesListSkeleton } from '$lib/domain/phrases';
 
@@ -24,7 +24,7 @@
   <div class="flex justify-between gap-4">
     <a
       class="flex cursor-pointer items-center gap-1.5 rounded-full px-2 py-1 text-sm font-semibold transition-colors hover:bg-muted"
-      href={Paths.home()}
+      href={pathTo('app')}
     >
       <ArrowLeftIcon class="h-4 w-4" strokeWidth={3} />
       <span>Go back</span>

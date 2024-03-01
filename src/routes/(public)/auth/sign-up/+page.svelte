@@ -7,7 +7,7 @@
 
   import { goto } from '$app/navigation';
   import { Button, Input } from '$lib/components';
-  import { EMAIL_REGEX, PASSWORD_REGEX } from '$lib/config';
+  import { EMAIL_REGEX, PASSWORD_REGEX, pathTo } from '$lib/config';
   import { signUpUser } from '$lib/db';
   import type { SignUpData } from '$lib/db';
 
@@ -30,7 +30,7 @@
       }
 
       if (data.user) {
-        goto('/');
+        goto(pathTo('app'));
       }
     },
   });
@@ -114,7 +114,7 @@
   <div class="space-y-2 text-sm">
     <p>
       Already have an account?
-      <a class="underline" href="/auth/sign-in">Sign in</a>
+      <a class="underline" href={pathTo('signIn')}>Sign in</a>
     </p>
   </div>
 </form>

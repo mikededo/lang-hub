@@ -2,7 +2,7 @@
   import PhraseActions from './actions.svelte';
 
   import { page } from '$app/stores';
-  import { Paths, QUERY_PARAM_KEYS } from '$lib/config';
+  import { QUERY_PARAM_KEYS, pathTo } from '$lib/config';
   import type { ProjectWithPhrases } from '$lib/db';
   import { Language, LanguageContainer } from '$lib/domain/languages';
 
@@ -10,15 +10,13 @@
   export let translated: number | null | undefined = undefined;
   export let languages: ProjectWithPhrases['languages'];
 
-  const queryParams = { [QUERY_PARAM_KEYS.editorSelectedKey]: phrase };
+  const queryParams = new URLSearchParams({ [QUERY_PARAM_KEYS.editorSelectedKey]: phrase });
+  const href = `${pathTo('editor', { project: $page.params.slug })}?${queryParams.toString()}`;
 </script>
 
 <li class="flex justify-between rounded border px-4 py-3">
   <div class="flex flex-col gap-2">
-    <a
-      href={Paths.editor($page.params.slug, { queryParams })}
-      class="text-lg font-semibold hover:underline hover:underline-offset-2"
-    >
+    <a {href} class="text-lg font-semibold hover:underline hover:underline-offset-2">
       {phrase}
     </a>
     {#if languages.length}

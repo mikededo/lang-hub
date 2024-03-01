@@ -2,12 +2,12 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{ts,html,svelte}'],
+  content: ['./src/**/*.html', './src/**/*.svelte', './src/**/*.ts'],
   darkMode: 'class',
   theme: {
     container: {
       center: true,
-      screens: { xl: '1100px', '2xl': '1100px' },
+      screens: { xl: '1100px', '2xl': '1360px' },
     },
     extend: {
       fontFamily: {

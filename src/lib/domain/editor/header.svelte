@@ -2,7 +2,7 @@
   import { ArrowLeftIcon } from 'lucide-svelte';
 
   import { IconButton } from '$lib/components';
-  import { Paths } from '$lib/config';
+  import { pathTo } from '$lib/config';
   import { CreatePhraseButton } from '$lib/domain/phrases';
 
   export let projectId: string;
@@ -13,7 +13,7 @@
   <aside class="hidden shrink-0 border-r border-border p-3 lg:block lg:w-editor-aside">
     <a
       class="flex w-fit cursor-pointer items-center gap-1.5 rounded-full px-2 py-1 text-sm font-semibold transition-colors hover:bg-muted"
-      href={Paths.project(projectId)}
+      href={pathTo('project', { project: projectId })}
     >
       <ArrowLeftIcon class="h-4 w-4" strokeWidth={3} />
       <span>Go back</span>
@@ -25,7 +25,7 @@
       Icon={ArrowLeftIcon}
       color="muted"
       strokeWidth={2.5}
-      href={Paths.project(projectId)}
+      href={pathTo('project', { project: projectId })}
     />
     <h2 class="flex-1 text-2xl font-bold">Editor</h2>
     <div>

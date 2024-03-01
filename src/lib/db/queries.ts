@@ -3,6 +3,7 @@ import type { PostgrestSingleResponse, QueryData, SupabaseClient } from '@supaba
 import { redirect } from '@sveltejs/kit';
 
 import { goto } from '$app/navigation';
+import { pathTo } from '$lib/config';
 import type { Database, Tables } from '$lib/types';
 
 export type Client = SupabaseClient<Database>;
@@ -18,9 +19,9 @@ const withUnauthorizedRedirect = async <T>(
     await client.auth.signOut();
 
     if (isBrowser()) {
-      goto('/auth');
+      goto(pathTo('signIn'));
     } else {
-      redirect(307, '/auth');
+      redirect(302, pathTo('signIn'));
     }
   }
   return response;

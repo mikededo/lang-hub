@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ExternalLink } from 'lucide-svelte';
 
-  import { Paths } from '$lib/config';
+  import { pathTo } from '$lib/config';
   import type { ProjectWithLanguages } from '$lib/db';
   import { Language, LanguageContainer } from '$lib/domain/languages';
 
@@ -26,7 +26,7 @@
   <div class="flex w-full flex-col justify-between">
     <div class="flex items-center gap-1 self-end">
       <a
-        href={Paths.project(id)}
+        href={pathTo('project', { project: `${id}` })}
         class="text-lg font-bold hover:underline"
         on:mouseenter={handleOnPrefetchProject}
       >

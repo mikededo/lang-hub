@@ -4,7 +4,7 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { Button, Dialog, Input } from '$lib/components';
-  import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
+  import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, pathTo } from '$lib/config';
   import { createProject } from '$lib/db';
   import type { Client, ProjectData } from '$lib/db';
 
@@ -26,10 +26,10 @@
   });
 
   const handleOnClose = (_?: MouseEvent, id?: number) => {
-    const toProjectUrl = id ? `project/${id}` : '';
+    const pathname = id ? pathTo('project', { project: `${id}` }) : $page.url.pathname;
     const params = new URLSearchParams(searchParams.toString());
     params.delete(QUERY_PARAM_KEYS.dialog);
-    goto(`${$page.url.pathname}${toProjectUrl}?${params.toString()}`);
+    goto(`${pathname}?${params.toString()}`);
 
     name = '';
     website = '';
