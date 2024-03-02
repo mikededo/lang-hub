@@ -69,6 +69,7 @@
   </div>
   <Button className="w-full h-10" type="submit" disabled={$mutation.isPending}>
     <span class="flex items-center justify-center">
+      <!--  TODO: Extract into LoadingButton or sth -->
       {#if $mutation.isPending}
         <span transition:slide={{ axis: 'x' }} class="mr-2">
           <Loader2 class="animate-spin" />

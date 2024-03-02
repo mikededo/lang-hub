@@ -5,6 +5,7 @@ export const QUERY_PARAM_KEYS = {
 } as const;
 export const QUERY_PARAM_VALUES = {
   dialog: {
+    profile: 'profile',
     createProject: 'create-project',
     deleteProject: 'delete-project',
     createPhrase: 'create-phrase',

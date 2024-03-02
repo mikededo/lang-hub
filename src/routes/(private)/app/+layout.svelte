@@ -1,15 +1,22 @@
 <script lang="ts">
+  import type { User } from '@supabase/supabase-js';
   import { LogOut, Moon, UserRound } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
 
   import type { LayoutData } from './$types';
 
   import { afterNavigate, goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { ButtonMenu, IconButton, MenuItem } from '$lib/components';
-  import { isAuthRelated, pathTo } from '$lib/config';
+  import { QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, isAuthRelated, pathTo } from '$lib/config';
+  import { ProfileDialog } from '$lib/domain/user';
 
   export let data: LayoutData;
+
   let fromAuth = false;
+  let { supabaseClient, session } = data;
+
+  let user: User | undefined = session?.user;
 
   afterNavigate(({ from }) => {
     if (isAuthRelated(from?.url.pathname)) {
@@ -24,14 +31,38 @@
     await data.supabaseClient.auth.signOut();
     goto(pathTo('signIn'));
   };
+
+  const handleOnShowProfile = async () => {
+    const params = new URLSearchParams($page.url.searchParams.toString());
+    params.set(QUERY_PARAM_KEYS.dialog, QUERY_PARAM_VALUES.dialog.profile);
+    goto(`${$page.url.pathname}?${params.toString()}`);
+  };
+
+  const handleOnUpdateUser = async () => {
+    try {
+      const { data } = await supabaseClient.auth.getSession();
+      if (data.session) {
+        user = data.session.user;
+      }
+    } catch (error) {
+      // TODO: Do something -> Display the error as a bottom banner?
+    }
+  };
 </script>
 
 <div class="h-full w-full" in:fade={{ delay: fromAuth ? 2500 : 0 }}>
   <header class="border-b">
     <div class="flex items-center justify-between gap-1 px-6 py-4">
       <h1 class="flex-1 text-xl font-bold">LangHub</h1>
+      {#if user}
+        <p class="mr-2 rounded-xl bg-muted px-3 py-0.5 text-sm">
+          {user.user_metadata.firstName}
+          {' '}
+          {user.user_metadata.lastName}
+        </p>
+      {/if}
       <ButtonMenu>
-        <MenuItem Icon={UserRound}>Your profile</MenuItem>
+        <MenuItem Icon={UserRound} on:click={handleOnShowProfile}>Your profile</MenuItem>
         <MenuItem Icon={LogOut} on:click={handleOnLogOut} destructive>Sign out</MenuItem>
       </ButtonMenu>
       <IconButton Icon={Moon} color="muted" />
@@ -57,4 +88,8 @@
   <div
     class="fixed inset-0 animate-pulse bg-[radial-gradient(#BAB0F277_1px,transparent_1px)] [background-size:20px_20px]"
   />
+{/if}
+
+{#if user}
+  <ProfileDialog {supabaseClient} {user} onSuccessUpdate={handleOnUpdateUser} />
 {/if}

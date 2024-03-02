@@ -1,12 +1,13 @@
 <script lang="ts">
   import { createMutation } from '@tanstack/svelte-query';
   import { Loader2 } from 'lucide-svelte';
-  import { fade, slide } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
 
   import type { PageData } from './$types';
 
   import { goto } from '$app/navigation';
   import { Button, Input } from '$lib/components';
+  import { Banner } from '$lib/components/banner';
   import { EMAIL_REGEX, PASSWORD_REGEX, pathTo } from '$lib/config';
   import { signUpUser } from '$lib/db';
   import type { SignUpData } from '$lib/db';
@@ -59,12 +60,9 @@
     <p class="text-foreground/75">Fill in the fields to create an account!</p>
   </div>
   {#if errorMessage}
-    <div
-      class="-my-3 min-h-10 w-full rounded-md bg-destructive/10 p-2 text-center text-sm"
-      in:fade={{ duration: 100 }}
-    >
+    <Banner class="-my-3 min-h-10" withTransition>
       <p class="text-destructive">{errorMessage}</p>
-    </div>
+    </Banner>
   {/if}
   <div class="flex w-full flex-col gap-4">
     <Input

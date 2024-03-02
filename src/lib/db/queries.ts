@@ -61,6 +61,11 @@ export type PhraseTranslations = Result<typeof getPhraseTranslationsQuery>;
 
 /* MUTATIONS */
 
+// USER
+export type UserData = { firstName: string; lastName: string; email: string; password?: string };
+export const updateUser = async (client: Client, { firstName, lastName, ...data }: UserData) =>
+  await client.auth.updateUser({ ...data, data: { firstName, lastName } });
+
 // PROJECTS
 export type ProjectData = { name: string; website?: string };
 export const createProject = async (client: Client, data: ProjectData) =>

@@ -1,12 +1,22 @@
 <script lang="ts">
+  import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+
   import { sharedClasses } from './shared';
 
   type ButtonVariant = 'condensed' | 'default';
   type ButtonColor = 'primary' | 'secondary' | 'muted' | 'destructive';
+  type BaseProps =
+    | (HTMLAnchorAttributes & { href: string })
+    | (HTMLButtonAttributes & { href?: never });
+  type $$Props = BaseProps & {
+    variant?: ButtonVariant;
+    color?: ButtonColor;
+    // TODO: Change for $$props.class
+    className?: string;
+  };
 
-  export let variant: ButtonVariant = 'default';
-  export let color: ButtonColor = 'primary';
-  // TODO: Change for $$props.class
+  export let variant: $$Props['variant'] = 'default';
+  export let color: $$Props['color'] = 'primary';
   export let className = '';
 
   const classes = sharedClasses({
