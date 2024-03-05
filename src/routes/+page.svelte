@@ -8,7 +8,7 @@
   export let data: PageData;
 </script>
 
-<header class="w-full bg-gray-50/90 pb-12 pt-8 md:py-24">
+<header class="w-full bg-muted/90 pb-12 pt-8 md:py-24">
   <div class="px-4 md:px-6">
     <div class="flex flex-col items-center gap-6 lg:flex-row lg:gap-12">
       <div class="mb-4 flex flex-col justify-center">
@@ -108,8 +108,8 @@
   <div
     class="container grid items-center gap-6 px-4 py-12 md:grid-cols-2 md:gap-8 md:py-24 lg:grid-cols-4 xl:px-6"
   >
+    <a class="text-2xl font-bold" href={pathTo('app')}>Lang Hub</a>
     <div class="space-y-4">
-      <a class="text-2xl font-bold" href={pathTo('app')}>Lang Hub</a>
       <p class="text-sm leading-7">The modern platform for localization and translation.</p>
     </div>
     <div class="space-y-4">

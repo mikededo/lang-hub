@@ -13,7 +13,10 @@
 </script>
 
 <div class="h-10 bg-muted">
-  <button class="flex w-full items-center gap-2 border-b px-3 py-2" on:click={handleOnClick}>
+  <button
+    class="flex w-full items-center gap-2 border-b border-border px-3 py-2"
+    on:click={handleOnClick}
+  >
     <ChevronDown class="h-4 w-4 transition-transform {collapsed ? '-rotate-90' : ''}" />
     <p class="text-semibold">{title}</p>
   </button>

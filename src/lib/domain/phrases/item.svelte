@@ -14,7 +14,7 @@
   const href = `${pathTo('editor', { project: $page.params.slug })}?${queryParams.toString()}`;
 </script>
 
-<li class="flex justify-between rounded border px-4 py-3">
+<li class="flex justify-between rounded border border-border px-4 py-3">
   <div class="flex flex-col gap-2">
     <a {href} class="text-lg font-semibold hover:underline hover:underline-offset-2">
       {phrase}

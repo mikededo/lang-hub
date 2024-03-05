@@ -22,7 +22,7 @@
 <IconButton {Icon} class={$open ? 'border bg-muted' : ''} color="muted" meltElement={trigger} />
 {#if $open}
   <div
-    class="flex min-w-[240px] flex-col items-start rounded border bg-white text-sm shadow-lg"
+    class="flex min-w-[240px] flex-col items-start rounded border border-border bg-background text-sm shadow-lg"
     use:melt={$menu}
     transition:fly={{ duration: 150, y: -10 }}
   >

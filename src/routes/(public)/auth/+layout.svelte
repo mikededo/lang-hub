@@ -24,14 +24,14 @@
 </svelte:head>
 
 <main>
-  <div class="fixed left-0 top-0 -z-10 h-full w-full">
+  <div class="fixed left-0 top-0 -z-10 h-full w-full bg-background">
     <div
-      class="absolute inset-0 -z-10 h-full w-full bg-[radial-gradient(#e7e7e7_1px,transparent_1px)] [background-size:16px_16px]"
+      class="absolute inset-0 -z-10 h-full w-full bg-[radial-gradient(#e7e7e7_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#333333_1px,transparent_1px)]"
     />
   </div>
   <div class="flex min-h-screen items-center">
     <div
-      class="fixed inset-0 overflow-auto bg-white p-8 md:relative md:mx-auto md:w-full md:max-w-md md:rounded md:border"
+      class="fixed inset-0 overflow-auto bg-background p-8 md:relative md:mx-auto md:w-full md:max-w-md md:rounded md:border"
     >
       {#key data.pathname}
         <div in:fade={{ duration: 200 }}>

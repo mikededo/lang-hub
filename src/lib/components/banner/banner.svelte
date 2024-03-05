@@ -13,7 +13,7 @@
 
   $: classes = twMerge(
     'w-full rounded-lg bg-muted p-2 text-center text-sm',
-    destructive && 'bg-destructive/10 text-destructive',
+    destructive && 'bg-destructive/10 dark:bg-destructive/75 text-destructive',
     $$restProps.class,
   );
 </script>

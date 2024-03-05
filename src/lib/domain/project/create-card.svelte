@@ -11,7 +11,7 @@
 </script>
 
 <button
-  class="flex h-40 w-full cursor-pointer items-center justify-center rounded border border-dashed outline-none transition-colors hover:bg-muted/50 focus:bg-muted/50"
+  class="flex h-40 w-full cursor-pointer items-center justify-center rounded border border-dashed border-border outline-none transition-colors hover:bg-muted/50 focus:bg-muted/50"
   on:click={handleOnCreate}
 >
   <p class="text-muted-foreground">Create a new project</p>

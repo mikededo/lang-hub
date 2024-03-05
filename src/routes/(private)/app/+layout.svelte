@@ -50,8 +50,8 @@
   };
 </script>
 
-<div class="h-full w-full" in:fade={{ delay: fromAuth ? 2500 : 0 }}>
-  <header class="border-b">
+<div class="min-h-screen w-full bg-background" in:fade={{ delay: fromAuth ? 2500 : 0 }}>
+  <header class="border-b border-border">
     <div class="flex items-center justify-between gap-1 px-6 py-4">
       <h1 class="flex-1 text-xl font-bold">LangHub</h1>
       {#if user}
@@ -75,7 +75,7 @@
 </div>
 
 {#if fromAuth}
-  <div class="fixed inset-0 z-[index=999] flex items-center bg-white" />
+  <div class="fixed inset-0 z-[index=999] flex items-center" />
   <div
     class="fixed inset-0 z-[index=1000] flex items-center bg-primary"
     in:fade={{ duration: 200 }}

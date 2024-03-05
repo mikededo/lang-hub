@@ -9,8 +9,8 @@
 </script>
 
 <!-- TODO: Extract into component  -->
-<div class="flex w-full border-b">
-  <aside class="hidden shrink-0 border-r border-border p-3 lg:block lg:w-editor-aside">
+<div class="flex w-full border-b border-border">
+  <aside class="hidden shrink-0 items-center border-r border-border p-3 lg:flex lg:w-editor-aside">
     <a
       class="flex w-fit cursor-pointer items-center gap-1.5 rounded-full px-2 py-1 text-sm font-semibold transition-colors hover:bg-muted"
       href={pathTo('project', { project: projectId })}

@@ -21,7 +21,7 @@
   };
 </script>
 
-<div class="flex h-40 w-full gap-6 rounded border p-4">
+<div class="flex h-40 w-full gap-6 rounded border border-border p-4">
   <div class="h-24 w-24 shrink-0 rounded bg-muted" />
   <div class="flex w-full flex-col justify-between">
     <div class="flex items-center gap-1 self-end">

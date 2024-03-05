@@ -43,7 +43,7 @@
           <p>Select a translation to start editing!</p>
         </div>
       {:else}
-        <div class="flex h-full w-full items-center justify-center rounded border"></div>
+        <div class="flex h-full w-full items-center justify-center rounded border border-border" />
       {/if}
     </section>
     <aside class="w-editor-aside shrink-0 border-l border-border">

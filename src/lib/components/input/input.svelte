@@ -11,8 +11,8 @@
   export let invalid: boolean = false;
 
   $: classes = twMerge(
-    'h-10 w-full ring ring-transparent border transition-all focus:ring-offset-white focus:ring-offset-2 focus:ring-primary rounded px-3 py-1 outline-none',
-    invalid && 'ring-offset-white ring-offset-2 ring-destructive border-destructive',
+    'h-10 bg-background w-full ring ring-transparent border border-input transition-all focus:ring-offset-background focus:ring-offset-2 focus:ring-primary rounded px-3 py-1 outline-none',
+    invalid && 'ring-offset-background ring-offset-2 ring-destructive border-destructive',
     className,
   );
 </script>
