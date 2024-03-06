@@ -1,6 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
 import { type Handle } from '@sveltejs/kit';
 
+import type { ColorScheme } from './app';
+
+import { PUBLIC_THEME_MODE_COOKIE } from '$env/static/public';
 import type { Database } from '$lib/types';
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -27,9 +30,11 @@ export const handle: Handle = async ({ event, resolve }) => {
     return session;
   };
 
+  event.locals.colorScheme = (event.cookies.get(PUBLIC_THEME_MODE_COOKIE) ||
+    'light') as ColorScheme;
+
   return resolve(event, {
-    filterSerializedResponseHeaders(name) {
-      return name === 'content-range';
-    },
+    filterSerializedResponseHeaders: (name) => name === 'content-range',
+    transformPageChunk: ({ html }) => html.replace('%color-scheme%', event.locals.colorScheme),
   });
 };

@@ -1,13 +1,13 @@
 <script lang="ts">
   import type { User } from '@supabase/supabase-js';
-  import { LogOut, Moon, UserRound } from 'lucide-svelte';
+  import { LogOut, UserRound } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
 
   import type { LayoutData } from './$types';
 
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { ButtonMenu, IconButton, MenuItem } from '$lib/components';
+  import { ButtonMenu, MenuItem, ThemeToggler } from '$lib/components';
   import { QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, isAuthRelated, pathTo } from '$lib/config';
   import { ProfileDialog } from '$lib/domain/user';
 
@@ -65,7 +65,7 @@
         <MenuItem Icon={UserRound} on:click={handleOnShowProfile}>Your profile</MenuItem>
         <MenuItem Icon={LogOut} on:click={handleOnLogOut} destructive>Sign out</MenuItem>
       </ButtonMenu>
-      <IconButton Icon={Moon} color="muted" />
+      <ThemeToggler theme={data.colorScheme} />
     </div>
   </header>
 

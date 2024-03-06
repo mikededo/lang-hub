@@ -10,5 +10,5 @@ export const load: LayoutServerLoad = async ({ locals }) => {
     redirect(302, pathTo('signIn'));
   }
 
-  return {};
+  return { colorScheme: locals.colorScheme };
 };
