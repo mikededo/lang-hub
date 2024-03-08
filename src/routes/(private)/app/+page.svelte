@@ -6,7 +6,7 @@
   import { Container } from '$lib/components';
   import { Keys } from '$lib/config';
   import type { ProjectWithLanguages } from '$lib/db';
-  import { getProject, getProjects } from '$lib/db';
+  import { getAvailableLanguages, getProject, getProjects } from '$lib/db';
   import {
     CreateProjectCard,
     CreateProjectDialog,
@@ -18,9 +18,13 @@
   export let data: PageData;
   const { queryClient, supabaseClient } = data;
 
-  const query = createQuery({
+  const projectsQuery = createQuery({
     queryKey: Keys.PROJECTS,
     queryFn: () => getProjects(supabaseClient),
+  });
+  const languagesQuery = createQuery({
+    queryKey: Keys.LANGUAGES,
+    queryFn: () => getAvailableLanguages(supabaseClient),
   });
 
   const handleOnPrefetch = (id: ProjectWithLanguages['id']) => {
@@ -32,7 +36,7 @@
 </script>
 
 <Container class="h-full w-full">
-  {#if $query.isLoading}
+  {#if $projectsQuery.isLoading}
     <ProjectsGrid>
       <ProjectSkeleton />
       <ProjectSkeleton />
@@ -40,15 +44,19 @@
       <ProjectSkeleton />
       <ProjectSkeleton />
     </ProjectsGrid>
-  {:else if !$query.data}
+  {:else if !$projectsQuery.data}
     <div>Empty state</div>
   {:else}
     <ProjectsGrid>
-      {#each $query.data as project (project.id)}
+      {#each $projectsQuery.data as project (project.id)}
         <ProjectCard {project} onPrefetch={handleOnPrefetch} />
       {/each}
       <CreateProjectCard />
     </ProjectsGrid>
   {/if}
 </Container>
-<CreateProjectDialog {supabaseClient} />
+<CreateProjectDialog
+  {supabaseClient}
+  loading={$languagesQuery.isLoading}
+  languages={$languagesQuery.data}
+/>

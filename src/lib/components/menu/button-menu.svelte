@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { createDropdownMenu, melt } from '@melt-ui/svelte';
+  import { createDropdownMenu } from '@melt-ui/svelte';
   import { Settings2 } from 'lucide-svelte';
   import { setContext } from 'svelte';
-  import { fly } from 'svelte/transition';
 
+  import { FloatingCard } from '../floating-card';
   import { IconButton } from '../icon-button';
 
   export let Icon = Settings2;
@@ -21,11 +21,7 @@
 
 <IconButton {Icon} class={$open ? 'border bg-muted' : ''} color="muted" meltElement={trigger} />
 {#if $open}
-  <div
-    class="flex min-w-[240px] flex-col items-start rounded border border-border bg-background text-sm shadow-lg"
-    use:melt={$menu}
-    transition:fly={{ duration: 150, y: -10 }}
-  >
+  <FloatingCard meltElement={menu}>
     <slot />
-  </div>
+  </FloatingCard>
 {/if}

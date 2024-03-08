@@ -275,15 +275,26 @@ export type Database = {
           is_default: boolean | null
           language_id: number | null
           name: string | null
+          project_id: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "project_languages_project_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Functions: {
       create_project: {
         Args: {
           name: string
-          website?: string
+          website: string
+          language_ids: number[]
+          default_language_id: number
         }
         Returns: {
           id: number

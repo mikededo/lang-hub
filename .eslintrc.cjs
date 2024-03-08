@@ -23,8 +23,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
+        argsIgnorePattern: '^(_|\\$\\$Props)',
+        varsIgnorePattern: '^(_|\\$\\$Props)',
         caughtErrorsIgnorePattern: '^_',
       },
     ],
@@ -55,6 +55,11 @@ module.exports = {
       parser: 'svelte-eslint-parser',
       parserOptions: {
         parser: '@typescript-eslint/parser',
+        svelteFeatures: {
+          // Whether to parse the `generics` attribute.
+          // See https://github.com/sveltejs/rfcs/pull/38
+          experimentalGenerics: true,
+        },
       },
     },
   ],

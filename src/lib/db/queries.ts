@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 
 import { goto } from '$app/navigation';
 import { pathTo } from '$lib/config';
-import type { Database, Tables } from '$lib/types';
+import type { Database, FunctionArgs, Tables } from '$lib/types';
 
 export type Client = SupabaseClient<Database>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,7 +37,9 @@ export const signUpUser = async (client: Client, { email, password, ...rest }: S
 
 // PROJECTS
 export const getProjectsQuery = (client: Client) =>
-  client.from('projects').select('*, languages:v_project_languages!project_languages(*)');
+  client
+    .from('projects')
+    .select('*, languages:v_project_languages!project_languages_project_fkey(*)');
 export const getProjects = async (client: Client) =>
   (await withUnauthorizedRedirect(client, await getProjectsQuery(client))).data;
 export type ProjectsWithLanguages = Result<typeof getProjectsQuery>;
@@ -46,7 +48,9 @@ export type ProjectWithLanguages = ProjectsWithLanguages[number];
 export const getProjectWithPhrases = (client: Client, id: number) =>
   client
     .from('projects')
-    .select('*, languages:v_project_languages!project_languages(*), phrases:v_phrase_languages(*)')
+    .select(
+      '*, languages:v_project_languages!project_languages_project_fkey(*), phrases:v_phrase_languages(*)',
+    )
     .eq('id', id)
     .single();
 export const getProject = async (client: Client, id: Tables<'projects'>['id']) =>
@@ -59,6 +63,11 @@ export const getPhraseTranslations = async (client: Client, key: string) =>
   (await withUnauthorizedRedirect(client, await getPhraseTranslationsQuery(client, key))).data;
 export type PhraseTranslations = Result<typeof getPhraseTranslationsQuery>;
 
+export const getAvailableLanguagesQuery = (client: Client) =>
+  client.from('languages').select('*').order('name', { ascending: true });
+export const getAvailableLanguages = async (client: Client) =>
+  (await withUnauthorizedRedirect(client, await getAvailableLanguagesQuery(client))).data;
+
 /* MUTATIONS */
 
 // USER
@@ -67,8 +76,7 @@ export const updateUser = async (client: Client, { firstName, lastName, ...data 
   await client.auth.updateUser({ ...data, data: { firstName, lastName } });
 
 // PROJECTS
-export type ProjectData = { name: string; website?: string };
-export const createProject = async (client: Client, data: ProjectData) =>
+export const createProject = async (client: Client, data: FunctionArgs<'create_project'>) =>
   (await client.rpc('create_project', data).throwOnError()).data;
 
 // PHRASES

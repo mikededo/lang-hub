@@ -1,4 +1,4 @@
-<div class="flex w-full animate-pulse gap-4 rounded border p-4">
+<div class="flex h-40 w-full animate-pulse gap-4 rounded border p-4">
   <div class="h-28 w-28 shrink-0 rounded bg-muted" />
   <div class="flex w-full flex-col justify-between">
     <div class="h-6 w-48 self-end rounded bg-muted" />
@@ -7,7 +7,7 @@
         <div class="h-5 w-6 rounded-full bg-muted px-2 py-0.5" />
         <div class="h-5 w-6 rounded-full bg-muted px-2 py-0.5" />
       </div>
-      <div class="flex justify-between text-sm">
+      <div class="flex flex-col items-end gap-1">
         <div class="h-5 w-12 rounded-full bg-muted px-2 py-0.5" />
         <div class="h-5 w-24 rounded-full bg-muted px-2 py-0.5" />
       </div>

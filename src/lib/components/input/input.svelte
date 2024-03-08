@@ -1,25 +1,27 @@
 <script lang="ts">
-  import { twMerge } from 'tailwind-merge';
+  import { type AnyMeltElement, emptyMeltElement, melt } from '@melt-ui/svelte';
+  import type { HTMLInputAttributes } from 'svelte/elements';
 
-  export let className: string | undefined = undefined;
-  export let disabled: boolean | undefined = undefined;
-  export let id: string | undefined = undefined;
-  export let name: string | undefined = undefined;
-  export let placeholder: string | undefined = undefined;
-  export let label: string | undefined = undefined;
+  import { inputClasses } from './input';
+
+  type $$Props = HTMLInputAttributes & {
+    invalid?: boolean;
+    label?: string;
+    meltElement?: AnyMeltElement;
+  };
+
+  export let label: string = '';
   export let value: string = '';
   export let invalid: boolean = false;
+  export let meltElement: AnyMeltElement | undefined = undefined;
 
-  $: classes = twMerge(
-    'h-10 bg-background w-full ring ring-transparent border border-input transition-all focus:ring-offset-background focus:ring-offset-2 focus:ring-primary rounded px-3 py-1 outline-none',
-    invalid && 'ring-offset-background ring-offset-2 ring-destructive border-destructive',
-    className,
-  );
+  $: classes = inputClasses({ className: $$props.class, invalid });
+  $: element = meltElement ?? emptyMeltElement;
 </script>
 
 <div class="flex w-full flex-col items-start gap-2">
   {#if label}
-    <label for={name} class="text-xs font-semibold uppercase">{label}</label>
+    <label for={$$props.name} class="text-xs font-semibold uppercase">{label}</label>
   {/if}
-  <input {id} {name} {placeholder} {disabled} class={classes} bind:value {...$$restProps} />
+  <input class={classes} bind:value use:melt={$element} {...$$restProps} />
 </div>

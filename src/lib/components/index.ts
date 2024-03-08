@@ -6,3 +6,4 @@ export * from './input';
 export * from './layout';
 export * from './menu';
 export * from './theme-toggler';
+export * from './combobox';
