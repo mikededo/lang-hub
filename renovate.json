@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
+  "rebaseStalePrs": true,
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "deps",
+  "rangeStrategy": "update-lockfile",
+  "prConcurrentLimit": 3,
+  "labels": ["renovate"],
+  "assignees": ["mikededo"],
+  "schedule": ["at any time"],
+  "packageRules": [
+    {
+      "depTypeList": ["dependencies"],
+      "updateTypes": ["patch"],
+      "groupName": "patch updates for dependencies",
+      "automerge": true
+    },
+    {
+      "depTypeList": ["dependencies"],
+      "updateTypes": ["minor", "major"],
+      "groupName": "non-patch updates for dependencies"
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["patch"],
+      "groupName": "patch updates for devDependencies",
+      "automerge": true
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["minor", "major"],
+      "groupName": "non-patch updates for devDependencies"
+    }
+  ]
+}
