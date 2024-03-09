@@ -1,8 +1,9 @@
 <script lang="ts">
+  import type { ProjectWithPhrases } from '$lib/db';
+
   import EmptyPhrases from './empty.svelte';
   import PhraseItem from './item.svelte';
 
-  import type { ProjectWithPhrases } from '$lib/db';
 
   export let languages: ProjectWithPhrases['languages'];
   export let phrases: ProjectWithPhrases['phrases'];

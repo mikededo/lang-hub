@@ -1,8 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 
+import { isAuthPath, pathTo } from '$lib/config';
+
 import type { PageLoad } from './$types';
 
-import { isAuthPath, pathTo } from '$lib/config';
 
 export const load: PageLoad = ({ url }) => {
   if (isAuthPath(url.pathname)) {

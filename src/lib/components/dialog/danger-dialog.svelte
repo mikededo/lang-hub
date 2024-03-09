@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Dialog } from '$lib/components';
-  import Button from '$lib/components/button/button.svelte';
+  import { Button, Dialog } from '$lib/components';
 
   export let onConfirm: () => void;
   export let disableConfirm = false;

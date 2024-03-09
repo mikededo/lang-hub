@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Moon, Sun } from 'lucide-svelte';
 
-  import { IconButton } from '../icon-button';
-
   import { browser } from '$app/environment';
   import { PUBLIC_THEME_MODE_COOKIE } from '$env/static/public';
+
+  import { IconButton } from '../icon-button';
 
   export let theme = 'light';
 

@@ -2,12 +2,13 @@
   import { createQuery } from '@tanstack/svelte-query';
   import { ArrowLeftIcon } from 'lucide-svelte';
 
-  import type { PageData } from './$types';
 
   import { Container } from '$lib/components';
   import { Keys, pathTo } from '$lib/config';
   import { getProject } from '$lib/db';
   import { CreatePhraseButton, PhrasesList, PhrasesListSkeleton } from '$lib/domain/phrases';
+
+  import type { PageData } from './$types';
 
   export let data: PageData;
   const { slug, supabaseClient } = data;

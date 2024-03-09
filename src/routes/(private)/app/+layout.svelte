@@ -3,13 +3,14 @@
   import { LogOut, UserRound } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
 
-  import type { LayoutData } from './$types';
 
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { ButtonMenu, MenuItem, ThemeToggler } from '$lib/components';
   import { QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, isAuthRelated, pathTo } from '$lib/config';
   import { ProfileDialog } from '$lib/domain/user';
+
+  import type { LayoutData } from './$types';
 
   export let data: LayoutData;
 

@@ -1,9 +1,10 @@
 <script lang="ts">
   import { error } from '@sveltejs/kit';
 
+  import { CreatePhraseDialog, DeletePhraseDialog } from '$lib/domain/phrases';
+
   import type { LayoutData } from './$types';
 
-  import { CreatePhraseDialog, DeletePhraseDialog } from '$lib/domain/phrases';
 
   export let data: LayoutData;
   const { slug, supabaseClient } = data;

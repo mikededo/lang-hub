@@ -1,9 +1,10 @@
 import { createBrowserClient, isBrowser, parse } from '@supabase/ssr';
 import { QueryClient } from '@tanstack/svelte-query';
 
+import { browser } from '$app/environment';
+
 import type { LayoutLoad } from './$types';
 
-import { browser } from '$app/environment';
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
   depends('supabase:auth');

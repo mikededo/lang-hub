@@ -1,7 +1,8 @@
-import type { PageLoad } from './$types';
 
 import { Keys } from '$lib/config';
 import { getProject } from '$lib/db';
+
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, parent }) => {
   const projectId = params.slug;

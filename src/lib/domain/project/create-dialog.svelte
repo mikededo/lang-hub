@@ -1,16 +1,23 @@
 <script lang="ts">
   import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
-  import { LanguageComboboxOption } from '../languages';
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { Button, Dialog, EmptyComboboxOption, Input, SingleCombobox } from '$lib/components';
-  import MultipleCombobox from '$lib/components/combobox/multiple-combobox.svelte';
+  import {
+    Button,
+    Dialog,
+    EmptyComboboxOption,
+    Input,
+    MultipleCombobox,
+    SingleCombobox,
+  } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, pathTo } from '$lib/config';
   import { createProject } from '$lib/db';
   import type { Client } from '$lib/db';
   import type { FunctionArgs, Tables } from '$lib/types';
+
+  import { LanguageComboboxOption } from '../languages';
 
   export let supabaseClient: Client;
   export let loading: boolean = false;

@@ -3,13 +3,13 @@
   import { Loader2 } from 'lucide-svelte';
   import { slide } from 'svelte/transition';
 
-  import type { PageData } from './$types';
-
   import { goto } from '$app/navigation';
   import { Button, Input } from '$lib/components';
   import { EMAIL_REGEX, PASSWORD_REGEX, pathTo } from '$lib/config';
   import { signInUser } from '$lib/db';
   import type { SignInData } from '$lib/db';
+
+  import type { PageData } from './$types';
 
   export let data: PageData;
 

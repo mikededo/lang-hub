@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createQuery } from '@tanstack/svelte-query';
 
-  import type { PageData } from './$types';
 
   import { page } from '$app/stores';
   import { EditorCollapsible } from '$lib/components/collapsible';
@@ -13,6 +12,8 @@
     PhraseTranslationsSkeleton,
     PhrasesList,
   } from '$lib/domain/editor';
+
+  import type { PageData } from './$types';
 
   export let data: PageData;
   const { projectId, supabaseClient } = data;

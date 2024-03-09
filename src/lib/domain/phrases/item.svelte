@@ -1,10 +1,11 @@
 <script lang="ts">
-  import PhraseActions from './actions.svelte';
 
   import { page } from '$app/stores';
   import { QUERY_PARAM_KEYS, pathTo } from '$lib/config';
   import type { ProjectWithPhrases } from '$lib/db';
   import { Language, LanguageContainer } from '$lib/domain/languages';
+
+  import PhraseActions from './actions.svelte';
 
   export let phrase: string;
   export let translated: number | null | undefined = undefined;

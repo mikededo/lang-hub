@@ -37,7 +37,7 @@ module.exports = {
       'error',
       {
         groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index', 'object'],
-        pathGroups: [{ pattern: '$**', group: 'internal' }],
+        pathGroups: [{ pattern: '\\$*/**', group: 'internal' }],
         pathGroupsExcludedImportTypes: ['builtin'],
         'newlines-between': 'always',
         alphabetize: { order: 'asc' },

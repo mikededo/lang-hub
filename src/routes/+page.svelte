@@ -1,9 +1,10 @@
 <script lang="ts">
-  import type { PageData } from './$types';
 
   import { Button } from '$lib/components';
   import { pathTo } from '$lib/config';
   import { Pricing } from '$lib/domain/landing';
+
+  import type { PageData } from './$types';
 
   export let data: PageData;
 </script>

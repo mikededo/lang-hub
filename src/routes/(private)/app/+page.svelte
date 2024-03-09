@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createQuery } from '@tanstack/svelte-query';
 
-  import type { PageData } from './$types';
 
   import { Container } from '$lib/components';
   import { Keys } from '$lib/config';
@@ -14,6 +13,8 @@
     ProjectSkeleton,
     ProjectsGrid,
   } from '$lib/domain/project';
+
+  import type { PageData } from './$types';
 
   export let data: PageData;
   const { queryClient, supabaseClient } = data;
