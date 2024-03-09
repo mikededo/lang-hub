@@ -6,8 +6,7 @@
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { Button, Dialog, Input } from '$lib/components';
-  import { Banner } from '$lib/components/banner';
+  import { Banner, Button, Dialog, Input } from '$lib/components';
   import {
     EMAIL_REGEX,
     NAME_REGEX,

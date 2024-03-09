@@ -13,6 +13,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
+    "story:build": "histoire build",
+    "story:dev": "histoire dev",
+    "story:preview": "histoire preview",
     "test": "vitest"
   },
   "dependencies": {
@@ -24,6 +27,7 @@
     "tailwind-merge": "2.2.1"
   },
   "devDependencies": {
+    "@histoire/plugin-svelte": "0.17.9",
     "@melt-ui/pp": "0.3.0",
     "@melt-ui/svelte": "0.75.3",
     "@sveltejs/adapter-auto": "3.1.1",
@@ -39,6 +43,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-svelte": "2.35.1",
+    "histoire": "0.17.9",
     "postcss": "8.4.35",
     "prettier": "3.2.5",
     "prettier-plugin-svelte": "3.2.2",

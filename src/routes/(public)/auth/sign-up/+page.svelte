@@ -3,10 +3,8 @@
   import { Loader2 } from 'lucide-svelte';
   import { slide } from 'svelte/transition';
 
-
   import { goto } from '$app/navigation';
-  import { Button, Input } from '$lib/components';
-  import { Banner } from '$lib/components/banner';
+  import { Banner, Button, Input } from '$lib/components';
   import { EMAIL_REGEX, PASSWORD_REGEX, pathTo } from '$lib/config';
   import { signUpUser } from '$lib/db';
   import type { SignUpData } from '$lib/db';
