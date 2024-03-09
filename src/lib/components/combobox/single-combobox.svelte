@@ -9,6 +9,7 @@
   type $$Props = ComboboxProps<ComboboxOption<T>>;
 
   export let onChangeSelected: $$Props['onChangeSelected'] = undefined;
+  export let value = '';
 
   const {
     elements: { menu, input, option },
@@ -25,6 +26,7 @@
   setContext('melt:option', option);
   setContext('melt:option-helpers', helpers);
 
+  $: value = $input.value;
   $: if (!$open) {
     $inputValue = $selected?.label ?? '';
   }

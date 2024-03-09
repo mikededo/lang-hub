@@ -12,6 +12,7 @@
   type $$Props = ComboboxProps<ComboboxOption<T>[]>;
 
   export let onChangeSelected: $$Props['onChangeSelected'] = undefined;
+  export let value = '';
 
   let { label, name } = $$props;
 
@@ -30,6 +31,8 @@
 
   setContext('melt:option', option);
   setContext('melt:option-helpers', helpers);
+
+  $: value = $input.value;
 
   const handleOnRemoveSelected = (value: T) => () => {
     $selected = ($selected ?? []).filter((item) => item.value !== value);

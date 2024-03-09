@@ -1,23 +1,15 @@
 <script lang="ts">
   import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
-
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import {
-    Button,
-    Dialog,
-    EmptyComboboxOption,
-    Input,
-    MultipleCombobox,
-    SingleCombobox,
-  } from '$lib/components';
+  import { Button, Dialog, Input } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, pathTo } from '$lib/config';
   import { createProject } from '$lib/db';
   import type { Client } from '$lib/db';
   import type { FunctionArgs, Tables } from '$lib/types';
 
-  import { LanguageComboboxOption } from '../languages';
+  import { LanguageSelector } from '../languages';
 
   export let supabaseClient: Client;
   export let loading: boolean = false;
@@ -99,36 +91,23 @@
         placeholder="Website i18n"
         bind:value={website}
       />
-      <MultipleCombobox
+      <LanguageSelector
         label="Project languages"
         name="projectLanguages"
         placeholder="Select the project languages"
+        languages={languages ?? []}
         onChangeSelected={handleOnChangeSelected}
         disabled={loading}
-      >
-        {#if languages?.length}
-          {#each languages as language (language.id)}
-            <LanguageComboboxOption {language} />
-          {/each}
-        {:else}
-          <EmptyComboboxOption>No results</EmptyComboboxOption>
-        {/if}
-      </MultipleCombobox>
-      <SingleCombobox
+        multiple
+      />
+      <LanguageSelector
         label="Default language"
         name="defaultLanguage"
         placeholder="Select the default language"
         onChangeSelected={handleOnChangeDefaultLanguage}
         disabled={selectedLanguages.length === 0}
-      >
-        {#if selectedLanguages.length}
-          {#each selectedLanguages as language (language.id)}
-            <LanguageComboboxOption {language} />
-          {/each}
-        {:else}
-          <EmptyComboboxOption>No results</EmptyComboboxOption>
-        {/if}
-      </SingleCombobox>
+        languages={selectedLanguages}
+      />
       <div class="flex items-center justify-end gap-2">
         <Button type="submit" disabled={!name}>Create</Button>
         <Button color="secondary" on:click={handleOnClose}>Cancel</Button>
