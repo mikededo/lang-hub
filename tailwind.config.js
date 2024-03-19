@@ -17,9 +17,10 @@ export default {
       height: {
         topbar: 'var(--topbar-height)',
         'editor-topbar': 'var(--editor-topbar-height)',
+        editor: 'var(--editor-height)',
       },
-      minHeight: {
-        editor: 'var(--min-editor-height)',
+      maxHeight: {
+        editor: 'var(--editor-height)',
       },
       width: {
         'editor-aside': 'var(--editor-aside-width)',

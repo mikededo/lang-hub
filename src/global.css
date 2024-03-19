@@ -8,8 +8,8 @@
     --topbar-height: 64px;
     --editor-topbar-height: 56px;
     --editor-aside-width: 320px;
-    --min-editor-height: calc(
-      calc(100vh - calc(var(--editor-topbar-height) + var(--topbar-height))) - 2px
+    --editor-height: calc(
+      calc(100vh - calc(var(--editor-topbar-height) + var(--topbar-height))) - 6px
     );
   }
 

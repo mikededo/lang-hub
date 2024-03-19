@@ -1,4 +1,5 @@
 export * from './button';
+export * from './checked-icon';
 export * from './collapsible';
 export * from './combobox';
 export * from './dialog';

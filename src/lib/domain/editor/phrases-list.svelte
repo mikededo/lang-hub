@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { CheckCircle2 } from 'lucide-svelte';
   import { twMerge } from 'tailwind-merge';
 
   import { page } from '$app/stores';
-  import { Input } from '$lib/components';
+  import { CheckedIcon, Input } from '$lib/components';
   import { QUERY_PARAM_KEYS } from '$lib/config';
   import type { ProjectWithPhrases } from '$lib/db';
 
@@ -14,8 +13,10 @@
   const selectedClasses = 'border-primary bg-primary/10 text-primary hover:bg-primary/20';
 </script>
 
-<aside class="hidden shrink-0 border-r border-border lg:block lg:w-editor-aside">
-  <div class="w-full px-4 py-3">
+<aside
+  class="hidden max-h-editor shrink-0 overflow-auto overflow-x-hidden border-r border-border lg:block lg:w-editor-aside"
+>
+  <div class="sticky top-0 w-full border-b bg-background px-4 py-3">
     <Input name="key" placeholder="Search keys" disabled={phrases.length === 0} />
   </div>
   {#if phrases.length === 0}
@@ -30,12 +31,12 @@
           )}
           href="?{QUERY_PARAM_KEYS.editorSelectedKey}={key}"
         >
-          <CheckCircle2 class="mt-0.5 h-4 w-4" />
+          <CheckedIcon checked={selectedKey === key} />
           <div class="flex flex-col">
             <p class="text-sm font-semibold">
               {key}
             </p>
-            <span class="text-xs">Total translated: {count}</span>
+            <span class="text-xs">Languages translated: {count}</span>
           </div>
         </a>
       {/each}

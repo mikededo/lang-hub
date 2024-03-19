@@ -24,9 +24,9 @@
 </svelte:head>
 
 <main>
-  <div class="fixed left-0 top-0 -z-10 h-full w-full bg-background">
+  <div class="fixed left-0 top-0 h-full w-full bg-background">
     <div
-      class="absolute inset-0 -z-10 h-full w-full bg-[radial-gradient(#e7e7e7_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#333333_1px,transparent_1px)]"
+      class="absolute inset-0 h-full w-full bg-[radial-gradient(#e7e7e7_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#333333_1px,transparent_1px)]"
     />
   </div>
   <div class="flex min-h-screen items-center">

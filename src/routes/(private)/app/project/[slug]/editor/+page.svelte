@@ -1,12 +1,12 @@
 <script lang="ts">
   import { createQuery } from '@tanstack/svelte-query';
 
-
   import { page } from '$app/stores';
   import { EditorCollapsible } from '$lib/components/collapsible';
   import { Keys, QUERY_PARAM_KEYS } from '$lib/config';
   import { getPhraseTranslations, getProject } from '$lib/db';
   import {
+    Editors,
     Header,
     PhraseTranslationsList,
     PhraseTranslationsSkeleton,
@@ -36,15 +36,15 @@
 
 <div class="flex flex-col">
   <Header {projectId} />
-  <div class="flex min-h-editor w-full">
+  <div class="h-editor flex w-full">
     <PhrasesList phrases={$projectQuery.data?.phrases ?? []} />
-    <section class="flex w-full p-4">
-      {#if !selectedKey}
+    <section class="flex w-full flex-col p-4">
+      {#if !selectedKey || !$phraseQuery.data}
         <div class="flex h-full w-full items-center justify-center rounded bg-muted/50">
           <p>Select a translation to start editing!</p>
         </div>
       {:else}
-        <div class="flex h-full w-full items-center justify-center rounded border border-border" />
+        <Editors phrases={$phraseQuery.data} />
       {/if}
     </section>
     <aside class="w-editor-aside shrink-0 border-l border-border">
