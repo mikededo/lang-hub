@@ -1,10 +1,8 @@
 <script lang="ts">
   import { createMutation } from '@tanstack/svelte-query';
-  import { Loader2 } from 'lucide-svelte';
-  import { slide } from 'svelte/transition';
 
   import { goto } from '$app/navigation';
-  import { Button, Input } from '$lib/components';
+  import { Input, LoadingButton } from '$lib/components';
   import { EMAIL_REGEX, PASSWORD_REGEX, pathTo } from '$lib/config';
   import { signInUser } from '$lib/db';
   import type { SignInData } from '$lib/db';
@@ -67,17 +65,14 @@
       <a class="ml-auto inline-block text-sm underline" href="/">Forgot your password?</a>
     </div>
   </div>
-  <Button className="w-full h-10" type="submit" disabled={$mutation.isPending}>
-    <span class="flex items-center justify-center">
-      <!--  TODO: Extract into LoadingButton or sth -->
-      {#if $mutation.isPending}
-        <span transition:slide={{ axis: 'x' }} class="mr-2">
-          <Loader2 class="animate-spin" />
-        </span>
-      {/if}
-      <span>Sign in</span>
-    </span>
-  </Button>
+  <LoadingButton
+    class="h-10 w-full"
+    type="submit"
+    loading={$mutation.isPending}
+    disabled={$mutation.isPending}
+  >
+    <span>Sign in</span>
+  </LoadingButton>
   <hr class="mx-auto w-3/4" />
   <div class="space-y-2 text-sm">
     <p>

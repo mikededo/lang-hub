@@ -17,11 +17,11 @@
 
   export let data: PageData;
   const { projectId, supabaseClient } = data;
-  let projectQuery = createQuery({
+
+  $: projectQuery = createQuery({
     queryKey: Keys.PROJECT(projectId),
     queryFn: async () => await getProject(supabaseClient, +projectId),
   });
-
   $: selectedKey = $page.url.searchParams.get(QUERY_PARAM_KEYS.editorSelectedKey);
   $: phraseQuery = createQuery({
     queryKey: Keys.PROJECT_PHRASE(projectId, selectedKey!),
@@ -34,9 +34,28 @@
   });
 </script>
 
+<svelte:head>
+  {#if $projectQuery.data}
+    <title>Editor · {$projectQuery.data.name} | Lang Hub</title>
+    <meta name="description" content="Start editing your keys with ease!" />
+    <meta property="og:title" content="Editor · {$projectQuery.data.name} | Lang Hub" />
+    <meta property="og:description" content="Start editing your keys with ease!" />
+  {:else if $projectQuery.isError}
+    <title>An error ocurred!</title>
+    <meta name="description" content="An error ocurred!" />
+  {:else}
+    <title>Loading...</title>
+    <meta name="description" content="Loading your project..." />
+  {/if}
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-title" content="Lang Hub" />
+  <meta name="application-name" content="Lang Hub" />
+</svelte:head>
+
 <div class="flex flex-col">
   <Header {projectId} />
-  <div class="h-editor flex w-full">
+  <div class="flex h-editor w-full">
     <PhrasesList phrases={$projectQuery.data?.phrases ?? []} />
     <section class="flex w-full flex-col p-4">
       {#if !selectedKey || !$phraseQuery.data}

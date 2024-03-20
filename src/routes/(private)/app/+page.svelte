@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createQuery } from '@tanstack/svelte-query';
 
-
   import { Container } from '$lib/components';
   import { Keys } from '$lib/config';
   import type { ProjectWithLanguages } from '$lib/db';
@@ -35,6 +34,17 @@
     });
   };
 </script>
+
+<svelte:head>
+  <title>Projects | Lang Hub</title>
+  <meta name="description" content="Welcome to Lang Hub!" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-title" content="Lang Hub" />
+  <meta name="application-name" content="Lang Hub" />
+  <meta property="og:title" content="Projects | Lang Hub" />
+  <meta property="og:description" content="Welcome to Lang Hub!" />
+</svelte:head>
 
 <Container class="h-full w-full">
   {#if $projectsQuery.isLoading}

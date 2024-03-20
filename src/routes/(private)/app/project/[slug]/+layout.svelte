@@ -5,7 +5,6 @@
 
   import type { LayoutData } from './$types';
 
-
   export let data: LayoutData;
   const { slug, supabaseClient } = data;
 

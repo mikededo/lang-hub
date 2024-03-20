@@ -3,7 +3,6 @@
   import { LogOut, UserRound } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
 
-
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { ButtonMenu, MenuItem, ThemeToggler } from '$lib/components';

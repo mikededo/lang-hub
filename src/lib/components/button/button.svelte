@@ -11,18 +11,15 @@
   type $$Props = BaseProps & {
     variant?: ButtonVariant;
     color?: ButtonColor;
-    // TODO: Change for $$props.class
-    className?: string;
   };
 
   export let variant: $$Props['variant'] = 'default';
   export let color: $$Props['color'] = 'primary';
-  export let className = '';
 
   const classes = sharedClasses({
     variant,
     color,
-    className,
+    className: $$props.class,
   });
 </script>
 

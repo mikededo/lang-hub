@@ -2,7 +2,6 @@
   import { createQuery } from '@tanstack/svelte-query';
   import { ArrowLeftIcon } from 'lucide-svelte';
 
-
   import { Container } from '$lib/components';
   import { Keys, pathTo } from '$lib/config';
   import { getProject } from '$lib/db';
@@ -20,6 +19,19 @@
 
   $: languages = $query.data?.languages.filter(Boolean).map((language) => language) ?? [];
 </script>
+
+<svelte:head>
+  {#if $query.data}
+    <title>Project: {$query.data.name}</title>
+    <meta name="description" content="Phrases for the {$query.data.name} project" />
+  {:else if $query.isError}
+    <title>An error ocurred!</title>
+    <meta name="description" content="An error ocurred!" />
+  {:else}
+    <title>Loading...</title>
+    <meta name="description" content="Loading your project..." />
+  {/if}
+</svelte:head>
 
 <Container class="flex flex-col gap-2">
   <div class="flex justify-between gap-4">
