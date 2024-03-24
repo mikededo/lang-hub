@@ -15,14 +15,15 @@
     QUERY_PARAM_KEYS,
     QUERY_PARAM_VALUES,
   } from '$lib/config';
-  import { type Client, type UserData, updateUser } from '$lib/db';
+  import { getSupabaseClient } from '$lib/context';
+  import { type UserData, updateUser } from '$lib/db';
 
   type UpdateUserData = UserData & { repeatPassword: string };
 
   export let user: User;
-  export let supabaseClient: Client;
   export let onSuccessUpdate: (() => void) | undefined = undefined;
 
+  let supabaseClient = getSupabaseClient();
   const { firstName, lastName } = user.user_metadata;
   let { email } = user;
   let errorMessage = '';

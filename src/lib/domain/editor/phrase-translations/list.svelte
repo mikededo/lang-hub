@@ -8,17 +8,17 @@
 </script>
 
 <div class="flex flex-col gap-0.5 p-2">
-  {#each translations as { id, translated_text: text, name: languageName } (id)}
+  {#each translations as { translated_text: text, language_name, language_id } (language_id)}
     <button
       class="flex cursor-pointer gap-2 rounded p-2 text-left hover:bg-muted"
-      class:bg-gray-100={$selectedLanguages.includes(`${id}`)}
-      on:click={onToggleLanguage(id)}
+      class:bg-gray-100={$selectedLanguages.includes(`${language_id}`)}
+      on:click={onToggleLanguage(language_id)}
     >
-      <CheckedIcon checked={$selectedLanguages.includes(`${id}`)} />
+      <CheckedIcon checked={$selectedLanguages.includes(`${language_id}`)} />
       <div class="flex w-full flex-col items-start gap-1">
         <div class="flex w-full items-center justify-between gap-1">
           <span class="line-clamp-1 text-sm font-semibold">
-            {languageName}
+            {language_name}
           </span>
           {#if text}
             <p

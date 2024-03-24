@@ -5,16 +5,16 @@
   import { page } from '$app/stores';
   import { Button, Dialog, Input } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES, pathTo } from '$lib/config';
+  import { getSupabaseClient } from '$lib/context';
   import { createProject } from '$lib/db';
-  import type { Client } from '$lib/db';
   import type { FunctionArgs, Tables } from '$lib/types';
 
   import { LanguageSelector } from '../languages';
 
-  export let supabaseClient: Client;
   export let loading: boolean = false;
   export let languages: Tables<'languages'>[] | null | undefined = [];
 
+  let supabaseClient = getSupabaseClient();
   let name: string;
   let website: string;
   let selectedLanguages: Tables<'languages'>[] = [];

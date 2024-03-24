@@ -10,6 +10,7 @@ export type Client = SupabaseClient<Database>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Result<T extends (...args: any) => any> = QueryData<ReturnType<T>>;
 
+// TODO: Improve handlers to handle other errors
 // Error handlers
 const withUnauthorizedRedirect = async <T>(
   client: Client,
@@ -88,3 +89,10 @@ export const createProjectPhrase = async (
 
 export const deleteProjectTranslation = async (client: Client, key: Tables<'phrases'>['key']) =>
   (await client.from('phrases').delete().eq('key', key).throwOnError()).data;
+
+type UpdatedTranslation = Omit<Tables<'translations'>, 'last_updated'>;
+export type UpsertTranslationData =
+  | Omit<UpdatedTranslation, 'id'> // Create
+  | (UpdatedTranslation & Required<Pick<Tables<'translations'>, 'id'>>); // Update
+export const upsertTranslation = async (client: Client, translation: UpsertTranslationData) =>
+  (await client.from('translations').upsert([translation]).select().throwOnError()).data;

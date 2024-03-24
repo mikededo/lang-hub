@@ -2,17 +2,30 @@
   import { sineInOut } from 'svelte/easing';
   import { fly } from 'svelte/transition';
 
+  import { clickAway } from '$lib/actions';
+  import { LoadingButton } from '$lib/components';
   import type { PhraseTranslations } from '$lib/db';
 
   export let phrase: PhraseTranslations[number] | undefined = undefined;
+  export let onSave: (phrase: PhraseTranslations[number], value: string) => void;
+  export let loading: boolean = false;
 
   let isFocused = false;
+  let value = phrase?.translated_text ?? '';
 
   const onFocus = () => {
     isFocused = true;
   };
+
   const onBlur = () => {
     isFocused = false;
+  };
+
+  const handleOnClick = () => {
+    if (!phrase) {
+      return;
+    }
+    onSave(phrase, value);
   };
 </script>
 
@@ -22,27 +35,31 @@
   class:border-transparent={isFocused}
   class:ring-1={isFocused}
   class:ring-primary={isFocused}
+  use:clickAway={onBlur}
 >
   {#if phrase}
-    <p class="text-xs font-semibold" transition:fly>{phrase.name}</p>
+    <p class="text-xs font-semibold" transition:fly>{phrase.language_name}</p>
     <textarea
       rows="2"
       class="w-full flex-1 resize-none outline-none"
       placeholder="Start typing..."
-      value={phrase.translated_text}
+      bind:value
       on:focus={onFocus}
-      on:blur={onBlur}
     />
     {#if isFocused}
       <div
         class="flex flex-row-reverse gap-2 self-end"
         transition:fly={{ y: 10, duration: 100, easing: sineInOut }}
       >
-        <button
-          class="cursor-pointer rounded-full bg-primary px-4 py-0.5 text-xs font-semibold text-primary-foreground hover:bg-primary/80"
+        <LoadingButton
+          class="z-20 cursor-pointer px-3 py-0.5 text-xs"
+          {loading}
+          loadingSize="small"
+          disabled={value === phrase.translated_text}
+          on:click={handleOnClick}
         >
-          Save
-        </button>
+          <span>Save</span>
+        </LoadingButton>
       </div>
     {/if}
   {/if}

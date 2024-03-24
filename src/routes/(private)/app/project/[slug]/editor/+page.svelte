@@ -4,6 +4,7 @@
   import { page } from '$app/stores';
   import { EditorCollapsible } from '$lib/components/collapsible';
   import { Keys, QUERY_PARAM_KEYS } from '$lib/config';
+  import type { PhraseTranslations } from '$lib/db';
   import { getPhraseTranslations, getProject } from '$lib/db';
   import {
     Editors,
@@ -12,11 +13,12 @@
     PhraseTranslationsSkeleton,
     PhrasesList,
   } from '$lib/domain/editor';
+  import type { Tables } from '$lib/types';
 
   import type { PageData } from './$types';
 
   export let data: PageData;
-  const { projectId, supabaseClient } = data;
+  const { projectId, supabaseClient, queryClient } = data;
 
   $: projectQuery = createQuery({
     queryKey: Keys.PROJECT(projectId),
@@ -32,6 +34,21 @@
     },
     enabled: !!selectedKey,
   });
+
+  const handleOnPhraseUpdated = ({ id, translated_text }: Required<Tables<'translations'>>) => {
+    queryClient.setQueryData<PhraseTranslations>(
+      Keys.PROJECT_PHRASE(projectId, selectedKey!),
+      (translations) => {
+        if (!translations) {
+          return;
+        }
+
+        return translations.map((translation) =>
+          translation.id === id ? { ...translation, translated_text } : translation,
+        );
+      },
+    );
+  };
 </script>
 
 <svelte:head>
@@ -63,7 +80,7 @@
           <p>Select a translation to start editing!</p>
         </div>
       {:else}
-        <Editors phrases={$phraseQuery.data} />
+        <Editors phrases={$phraseQuery.data} onPhraseUpdated={handleOnPhraseUpdated} />
       {/if}
     </section>
     <aside class="w-editor-aside shrink-0 border-l border-border">

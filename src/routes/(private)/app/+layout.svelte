@@ -91,5 +91,5 @@
 {/if}
 
 {#if user}
-  <ProfileDialog {supabaseClient} {user} onSuccessUpdate={handleOnUpdateUser} />
+  <ProfileDialog {user} onSuccessUpdate={handleOnUpdateUser} />
 {/if}

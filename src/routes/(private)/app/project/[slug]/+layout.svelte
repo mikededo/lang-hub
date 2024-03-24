@@ -18,5 +18,5 @@
 
 <slot />
 
-<CreatePhraseDialog {supabaseClient} projectId={+slug} />
-<DeletePhraseDialog {supabaseClient} projectId={+slug} />
+<CreatePhraseDialog projectId={+slug} />
+<DeletePhraseDialog projectId={+slug} />

@@ -5,13 +5,14 @@
   import { page } from '$app/stores';
   import { DangerDialog } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
+  import { getSupabaseClient } from '$lib/context';
   import { deleteProjectTranslation } from '$lib/db';
-  import type { Client, ProjectWithPhrases } from '$lib/db';
+  import type { ProjectWithPhrases } from '$lib/db';
   import type { Tables } from '$lib/types';
 
   export let projectId: Tables<'phrases'>['project'];
-  export let supabaseClient: Client;
 
+  let supabaseClient = getSupabaseClient();
   const queryClient = useQueryClient();
   const mutation = createMutation({
     mutationFn: async (key: string) => await deleteProjectTranslation(supabaseClient, key),

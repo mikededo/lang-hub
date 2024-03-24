@@ -66,8 +66,4 @@
     </ProjectsGrid>
   {/if}
 </Container>
-<CreateProjectDialog
-  {supabaseClient}
-  loading={$languagesQuery.isLoading}
-  languages={$languagesQuery.data}
-/>
+<CreateProjectDialog loading={$languagesQuery.isLoading} languages={$languagesQuery.data} />

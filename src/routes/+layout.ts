@@ -5,7 +5,6 @@ import { browser } from '$app/environment';
 
 import type { LayoutLoad } from './$types';
 
-
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
   depends('supabase:auth');
 

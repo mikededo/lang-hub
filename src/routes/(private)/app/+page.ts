@@ -1,4 +1,3 @@
-
 import { Keys } from '$lib/config';
 import { getAvailableLanguages, getProjects } from '$lib/db';
 

@@ -5,13 +5,13 @@
   import { page } from '$app/stores';
   import { Button, Dialog, Input } from '$lib/components';
   import { Keys, QUERY_PARAM_KEYS, QUERY_PARAM_VALUES } from '$lib/config';
+  import { getSupabaseClient } from '$lib/context';
   import { createProjectPhrase } from '$lib/db';
-  import type { Client } from '$lib/db';
   import type { Tables } from '$lib/types';
 
   export let projectId: Tables<'projects'>['id'];
-  export let supabaseClient: Client;
 
+  let supabaseClient = getSupabaseClient();
   let key: string;
 
   $: searchParams = $page.url.searchParams;
