@@ -22,8 +22,8 @@
   }
 
   $: classes = twMerge(
-    'px-2 py-1.5 hover:bg-muted transition-colors w-full rounded cursor-pointer flex gap-2 items-center',
-    destructive && 'text-destructive hover:bg-destructive/10',
+    'flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 transition-colors hover:bg-muted',
+    destructive && 'text-destructive hover:bg-destructive/10 dark:hover:bg-destructive-900/50',
     $$restProps.class,
   );
 </script>

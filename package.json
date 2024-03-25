@@ -61,6 +61,12 @@
       "prettier-plugin-svelte",
       "prettier-plugin-tailwindcss"
     ],
+    "tailwindFunctions": [
+      "twMerge"
+    ],
+    "tailwindAttributes": [
+      "classes"
+    ],
     "overrides": [
       {
         "files": "*.svelte",

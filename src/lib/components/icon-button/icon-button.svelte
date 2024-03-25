@@ -31,8 +31,9 @@
   $: colors = {
     primary: 'hover:bg-primary/90 stroke-primary-foreground',
     secondary: 'hover:bg-secondary/90 stroke-secondary-foreground',
-    muted: 'hover:bg-muted stroke-foreground',
-    destructive: 'hover:bg-destructive/10 stroke-destructive',
+    muted: 'hover:bg-muted stroke-foreground dark:stroke-',
+    destructive:
+      'hover:bg-destructive-200 dark:hover:bg-destructive-900/50 stroke-destructive dark:stroke-destructive-700',
   };
 
   $: element = meltElement ?? emptyMeltElement;

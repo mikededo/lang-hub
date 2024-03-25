@@ -14,7 +14,7 @@
   transition:fade={{ duration: 150 }}
 >
   <div
-    class="flex min-h-fit w-full min-w-[480px] max-w-lg flex-col gap-4 rounded border border-border bg-card px-8 py-6 shadow-lg"
+    class="border-border flex min-h-fit w-full min-w-[480px] max-w-lg flex-col gap-4 rounded border bg-background px-8 py-6 shadow-lg"
     aria-modal="true"
   >
     <div class="flex w-full items-center justify-between">

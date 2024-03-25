@@ -1,5 +1,4 @@
 <script lang="ts">
-
   import { Button } from '$lib/components';
   import { pathTo } from '$lib/config';
   import { Pricing } from '$lib/domain/landing';
@@ -9,7 +8,7 @@
   export let data: PageData;
 </script>
 
-<header class="w-full bg-muted/90 pb-12 pt-8 md:py-24">
+<header class="bg-muted/90 w-full pb-12 pt-8 md:py-24">
   <div class="px-4 md:px-6">
     <div class="flex flex-col items-center gap-6 lg:flex-row lg:gap-12">
       <div class="mb-4 flex flex-col justify-center">
@@ -66,7 +65,7 @@
     <div class="container px-8 lg:px-12">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-12">
         <div
-          class="rounded border border-transparent p-4 transition-colors hover:border-border hover:bg-muted"
+          class="hover:border-border rounded border border-transparent p-4 transition-colors hover:bg-muted"
         >
           <h3 class="mb-1 text-lg font-bold">Automated Workflows</h3>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -74,7 +73,7 @@
           </p>
         </div>
         <div
-          class="rounded border border-transparent p-4 transition-colors hover:border-border hover:bg-muted"
+          class="hover:border-border rounded border border-transparent p-4 transition-colors hover:bg-muted"
         >
           <h3 class="text-lg font-bold">Integrated Collaboration</h3>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -83,7 +82,7 @@
           </p>
         </div>
         <div
-          class="rounded border border-transparent p-4 transition-colors hover:border-border hover:bg-muted"
+          class="hover:border-border rounded border border-transparent p-4 transition-colors hover:bg-muted"
         >
           <h3 class="text-lg font-bold">Powerful Management</h3>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -91,7 +90,7 @@
           </p>
         </div>
         <div
-          class="rounded border border-transparent p-4 transition-colors hover:border-border hover:bg-muted"
+          class="hover:border-border rounded border border-transparent p-4 transition-colors hover:bg-muted"
         >
           <h3 class="text-lg font-bold">Real-time Updates</h3>
           <p class="text-sm text-gray-500 dark:text-gray-400">

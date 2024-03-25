@@ -51,7 +51,7 @@
 </script>
 
 <div class="min-h-screen w-full bg-background" in:fade={{ delay: fromAuth ? 2500 : 0 }}>
-  <header class="border-b border-border">
+  <header class="border-border border-b">
     <div class="flex items-center justify-between gap-1 px-6 py-4">
       <h1 class="flex-1 text-xl font-bold">LangHub</h1>
       {#if user}
@@ -81,7 +81,7 @@
     in:fade={{ duration: 200 }}
     out:fade
   >
-    <p class="m-auto animate-none text-center text-2xl font-semibold text-primary-foreground">
+    <p class="m-auto animate-none text-center text-2xl font-semibold text-white">
       We are preparing everything<br /> for you 🚀
     </p>
   </div>

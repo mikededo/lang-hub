@@ -5,8 +5,8 @@
   export let code: string | null;
 
   const classes = twMerge(
-    'rounded-full bg-muted py-0.5 px-2 font-semibold',
-    isDefault && 'bg-primary text-primary-foreground',
+    'rounded-full bg-muted px-2 py-0.5 font-semibold',
+    isDefault && 'bg-primary text-white',
   );
 </script>
 

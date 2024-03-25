@@ -22,7 +22,7 @@
           </span>
           {#if text}
             <p
-              class="flex items-center rounded-full bg-primary px-2 py-[1px] text-[10px] text-primary-foreground"
+              class="flex items-center rounded-full bg-primary px-2 py-[1px] text-[10px] text-white"
             >
               Translated
             </p>
@@ -35,7 +35,7 @@
           {/if}
         </div>
         {#if text}
-          <span class="line-clamp-3 text-xs italic text-foreground/80">{text}</span>
+          <span class="text-foreground/80 line-clamp-3 text-xs italic">{text}</span>
         {/if}
       </div>
     </button>

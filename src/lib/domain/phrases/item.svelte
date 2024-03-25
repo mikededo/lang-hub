@@ -1,5 +1,4 @@
 <script lang="ts">
-
   import { page } from '$app/stores';
   import { QUERY_PARAM_KEYS, pathTo } from '$lib/config';
   import type { ProjectWithPhrases } from '$lib/db';
@@ -15,7 +14,7 @@
   const href = `${pathTo('editor', { project: $page.params.slug })}?${queryParams.toString()}`;
 </script>
 
-<li class="flex justify-between rounded border border-border px-4 py-3">
+<li class="border-border flex justify-between rounded border px-4 py-3">
   <div class="flex flex-col gap-2">
     <a {href} class="text-lg font-semibold hover:underline hover:underline-offset-2">
       {phrase}

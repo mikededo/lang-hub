@@ -11,57 +11,24 @@
     --editor-height: calc(
       calc(100vh - calc(var(--editor-topbar-height) + var(--topbar-height))) - 6px
     );
-  }
-
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 20%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 20%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
-    --primary: 249 72% 64%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
-    --info: 214 77% 56%;
-    --info-foreground: 60 9.1% 97.8%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 0 0% 20%;
-    --radius: 1rem;
 
     --font-sans: 'Geist';
   }
 
+  :root {
+    --background: theme('colors.white');
+    --foreground: theme('colors.gray.700');
+    --muted: theme('colors.secondary.100');
+    --muted-foreground: theme('colors.foreground');
+    --border: theme('colors.secondary.200');
+  }
+
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
-    --primary: 249 72% 64%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
-    --info: 217 60% 33%;
-    --info-foreground: 60 9.1% 97.8%;
-    --destructive: 0 75.8% 50.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 240 3.7% 15.9%;
-    --input: 12 6.5% 15.1%;
-    --ring: 35.5 91.7% 32.9%;
+    --background: theme('colors.slate.950');
+    --foreground: theme('colors.white');
+    --muted: theme('colors.secondary.900');
+    --muted-foreground: theme('colors.foreground');
+    --border: theme('colors.secondary.800');
   }
 }
 
@@ -72,6 +39,6 @@
 }
 
 html {
-  color: hsl(var(--foreground));
-  stroke: hsl(var(--foreground));
+  color: var(--foreground);
+  stroke: var(--foreground);
 }

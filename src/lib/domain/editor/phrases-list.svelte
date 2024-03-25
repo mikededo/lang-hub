@@ -14,7 +14,7 @@
 </script>
 
 <aside
-  class="hidden max-h-editor shrink-0 overflow-auto overflow-x-hidden border-r border-border lg:block lg:w-editor-aside"
+  class="border-border hidden max-h-editor shrink-0 overflow-auto overflow-x-hidden border-r lg:block lg:w-editor-aside"
 >
   <div class="sticky top-0 w-full border-b bg-background px-4 py-3">
     <Input name="key" placeholder="Search keys" disabled={phrases.length === 0} />

@@ -4,7 +4,6 @@
   import EmptyPhrases from './empty.svelte';
   import PhraseItem from './item.svelte';
 
-
   export let languages: ProjectWithPhrases['languages'];
   export let phrases: ProjectWithPhrases['phrases'];
 </script>

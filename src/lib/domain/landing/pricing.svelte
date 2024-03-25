@@ -9,7 +9,7 @@
   <h2 class="text-center text-3xl font-bold tracking-tighter sm:text-5xl">Pricing</h2>
   <div class="container mb-12 flex flex-row overflow-hidden rounded">
     <div
-      class="flex h-60 w-2/3 shrink-0 flex-col gap-2 rounded-l border border-r-0 border-border p-6"
+      class="border-border flex h-60 w-2/3 shrink-0 flex-col gap-2 rounded-l border border-r-0 p-6"
     >
       <h3 class="text-2xl font-semibold">Not our bussiness!</h3>
       <div class="flex flex-row gap-6">

@@ -76,14 +76,14 @@
     <PhrasesList phrases={$projectQuery.data?.phrases ?? []} />
     <section class="flex w-full flex-col p-4">
       {#if !selectedKey || !$phraseQuery.data}
-        <div class="flex h-full w-full items-center justify-center rounded bg-muted/50">
+        <div class="bg-muted/50 flex h-full w-full items-center justify-center rounded">
           <p>Select a translation to start editing!</p>
         </div>
       {:else}
         <Editors phrases={$phraseQuery.data} onPhraseUpdated={handleOnPhraseUpdated} />
       {/if}
     </section>
-    <aside class="w-editor-aside shrink-0 border-l border-border">
+    <aside class="border-border w-editor-aside shrink-0 border-l">
       <EditorCollapsible title="Languages">
         {#if $phraseQuery.isLoading}
           <PhraseTranslationsSkeleton />

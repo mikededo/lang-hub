@@ -19,7 +19,7 @@
 
 <div class="flex items-center gap-2.5">
   <TextIconButton Icon={Copy} variant="condensed" color="secondary">Duplicate</TextIconButton>
-  <div class="h-6 w-[1px] bg-border" />
+  <div class="h-6 w-[1px] bg-secondary" />
   <div class="flex gap-1">
     <IconButton color="muted" Icon={Settings} size="small" />
     <IconButton color="destructive" Icon={Trash} size="small" on:click={handleOnDelete} />

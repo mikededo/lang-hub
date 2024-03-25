@@ -1,7 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { type Handle } from '@sveltejs/kit';
 
-
 import { PUBLIC_THEME_MODE_COOKIE } from '$env/static/public';
 import type { Database } from '$lib/types';
 

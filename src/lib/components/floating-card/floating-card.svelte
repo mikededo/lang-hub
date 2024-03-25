@@ -13,7 +13,7 @@
   export let meltElement: $$Props['meltElement'] = undefined;
 
   $: classes = twMerge(
-    'flex min-w-[240px] flex-col items-start rounded border border-border bg-background text-sm shadow-lg',
+    'border-border flex min-w-[240px] flex-col items-start rounded border bg-background text-sm shadow-lg',
     $$restProps.class,
   );
 

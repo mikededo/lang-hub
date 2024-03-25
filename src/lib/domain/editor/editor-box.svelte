@@ -30,7 +30,7 @@
 </script>
 
 <div
-  class=":w flex h-full w-full flex-col gap-2 border-x border-b border-border p-3 transition-all first:rounded-t first:border last:rounded-b"
+  class=":w border-border flex h-full w-full flex-col gap-2 border-x border-b p-3 transition-all first:rounded-t first:border last:rounded-b"
   class:z-10={isFocused}
   class:border-transparent={isFocused}
   class:ring-1={isFocused}
