@@ -4,7 +4,7 @@
   import { page } from '$app/stores';
   import { EditorCollapsible } from '$lib/components/collapsible';
   import { Keys, QUERY_PARAM_KEYS } from '$lib/config';
-  import type { PhraseTranslations } from '$lib/db';
+  import type { PhraseTranslations, ProjectWithPhrases } from '$lib/db';
   import { getPhraseTranslations, getProject } from '$lib/db';
   import {
     Editors,
@@ -13,7 +13,7 @@
     PhraseTranslationsSkeleton,
     PhrasesList,
   } from '$lib/domain/editor';
-  import type { Tables } from '$lib/types';
+  import type { PhraseUpdater } from '$lib/domain/editor';
 
   import type { PageData } from './$types';
 
@@ -35,7 +35,10 @@
     enabled: !!selectedKey,
   });
 
-  const handleOnPhraseUpdated = ({ id, translated_text }: Required<Tables<'translations'>>) => {
+  const handleOnPhraseUpdated: PhraseUpdater = (
+    { id, phrase_key, language_id, translated_text },
+    opts,
+  ) => {
     queryClient.setQueryData<PhraseTranslations>(
       Keys.PROJECT_PHRASE(projectId, selectedKey!),
       (translations) => {
@@ -44,10 +47,36 @@
         }
 
         return translations.map((translation) =>
-          translation.id === id ? { ...translation, translated_text } : translation,
+          // We match by language_id because the id may not available in the response
+          // and each translation is also unique by language_id
+          translation.language_id === language_id
+            ? { ...translation, id, translated_text }
+            : translation,
         );
       },
     );
+
+    if (!opts.isNew) {
+      return;
+    }
+
+    // Update also the project translated count if translation is new
+    queryClient.setQueryData<ProjectWithPhrases>(Keys.PROJECT(projectId), (project) => {
+      if (!project) {
+        return;
+      }
+
+      const updated = { ...project };
+      updated.phrases = updated.phrases.map((phrase) => {
+        if (phrase.phrase_id !== phrase_key) {
+          return phrase;
+        }
+
+        return { ...phrase, translated_count: (phrase.translated_count ?? 0) + 1 };
+      });
+
+      return updated;
+    });
   };
 </script>
 

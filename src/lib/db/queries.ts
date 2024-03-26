@@ -95,4 +95,10 @@ export type UpsertTranslationData =
   | Omit<UpdatedTranslation, 'id'> // Create
   | (UpdatedTranslation & Required<Pick<Tables<'translations'>, 'id'>>); // Update
 export const upsertTranslation = async (client: Client, translation: UpsertTranslationData) =>
-  (await client.from('translations').upsert([translation]).select().throwOnError()).data;
+  (
+    await client
+      .from('translations')
+      .upsert([translation], { defaultToNull: false })
+      .select()
+      .throwOnError()
+  ).data;

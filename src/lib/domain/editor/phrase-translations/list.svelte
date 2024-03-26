@@ -35,7 +35,7 @@
           {/if}
         </div>
         {#if text}
-          <span class="line-clamp-3 text-xs italic text-foreground/80">{text}</span>
+          <span class="line-clamp-3 w-full text-xs italic text-foreground/80">{text}</span>
         {/if}
       </div>
     </button>

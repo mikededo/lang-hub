@@ -5,13 +5,14 @@
   import { Banner, IconButton } from '$lib/components';
   import { getSupabaseClient } from '$lib/context';
   import { type PhraseTranslations, type UpsertTranslationData, upsertTranslation } from '$lib/db';
-  import type { OptProp, Tables } from '$lib/types';
+  import type { OptProp } from '$lib/types';
 
   import EditorBox from './editor-box.svelte';
+  import type { PhraseUpdater } from './editors';
   import { selectedLanguages } from './helpers';
 
   export let phrases: PhraseTranslations;
-  export let onPhraseUpdated: OptProp<(translation: Tables<'translations'>) => void> = undefined;
+  export let onPhraseUpdated: OptProp<PhraseUpdater> = undefined;
 
   let supabaseClient = getSupabaseClient();
   let mutation = createMutation({
@@ -20,8 +21,7 @@
   });
   let error: string | undefined = undefined;
 
-  const getPhraseFromLanguageId = (id: string) =>
-    phrases.find((phrase) => phrase.language_id === +id);
+  $: getPhraseFromLanguageId = (id: string) => phrases.find((phrase) => phrase.language_id === +id);
 
   const handleOnSavePhrase = (phrase: PhraseTranslations[number], value: string) => {
     if (!phrase.language_id || !phrase.phrase_id) {
@@ -37,7 +37,7 @@
     $mutation.mutate(translation, {
       onSuccess: (translations) => {
         if (translations && translations.length === 1) {
-          onPhraseUpdated?.(translations[0]);
+          onPhraseUpdated?.(translations[0], { isNew: !phrase.id });
         }
       },
       onError: () => {

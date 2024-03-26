@@ -27,7 +27,6 @@
     }
 
     onSave(phrase, value);
-    phrase.translated_text = value;
   };
 </script>
 
