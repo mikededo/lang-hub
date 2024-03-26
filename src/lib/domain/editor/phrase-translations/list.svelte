@@ -11,7 +11,7 @@
   {#each translations as { translated_text: text, language_name, language_id } (language_id)}
     <button
       class="flex cursor-pointer gap-2 rounded p-2 text-left hover:bg-muted"
-      class:bg-gray-100={$selectedLanguages.includes(`${language_id}`)}
+      class:bg-muted={$selectedLanguages.includes(`${language_id}`)}
       on:click={onToggleLanguage(language_id)}
     >
       <CheckedIcon checked={$selectedLanguages.includes(`${language_id}`)} />
@@ -35,7 +35,7 @@
           {/if}
         </div>
         {#if text}
-          <span class="text-foreground/80 line-clamp-3 text-xs italic">{text}</span>
+          <span class="line-clamp-3 text-xs italic text-foreground/80">{text}</span>
         {/if}
       </div>
     </button>

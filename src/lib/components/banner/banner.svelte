@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { HTMLAttributes } from 'svelte/elements';
-  import { fade } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
   import { twMerge } from 'tailwind-merge';
 
   type $$Props = HTMLAttributes<HTMLDivElement> & {
@@ -18,6 +18,10 @@
   );
 </script>
 
-<div {...$$restProps} class={classes} in:fade={{ duration: withTransition ? 100 : 0 }}>
+<div
+  {...$$restProps}
+  class={classes}
+  transition:slide={{ axis: 'y', duration: withTransition ? 100 : 0 }}
+>
   <slot />
 </div>

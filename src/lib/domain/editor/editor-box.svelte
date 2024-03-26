@@ -25,12 +25,14 @@
     if (!phrase) {
       return;
     }
+
     onSave(phrase, value);
+    phrase.translated_text = value;
   };
 </script>
 
 <div
-  class=":w border-border flex h-full w-full flex-col gap-2 border-x border-b p-3 transition-all first:rounded-t first:border last:rounded-b"
+  class="flex h-full w-full flex-col gap-2 border-x border-b border-border p-3 transition-all first:rounded-t first:border last:rounded-b"
   class:z-10={isFocused}
   class:border-transparent={isFocused}
   class:ring-1={isFocused}
@@ -41,7 +43,7 @@
     <p class="text-xs font-semibold" transition:fly>{phrase.language_name}</p>
     <textarea
       rows="2"
-      class="w-full flex-1 resize-none outline-none"
+      class="w-full flex-1 resize-none bg-background outline-none"
       placeholder="Start typing..."
       bind:value
       on:focus={onFocus}
