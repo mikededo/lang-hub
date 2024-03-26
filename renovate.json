@@ -1,6 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
+  "extends": [
+    "config:base",
+    ":semanticCommitTypeAll(chore)",
+    ":automergePatch",
+    ":noUnscheduledUpdates",
+    ":separatePatchReleases"
+  ],
   "rebaseStalePrs": true,
   "semanticCommits": "enabled",
   "semanticCommitScope": "deps",
