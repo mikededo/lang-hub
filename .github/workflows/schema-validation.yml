@@ -1,0 +1,23 @@
+name: Schema validation
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Enable local supabase
+        run: supabase start
+      - name: Schema verification
+        run: |
+          supabase gen types typescript --local > ./src/lib/types/schema.generated.ts
+          if ! git diff --ignore-space-at-eol --exit-code --quiet ./src/lib/types/schema.generated.ts; then
+            echo "Schema is not up to date. See status below."
+            git diff
+            exit 1
+          fi
