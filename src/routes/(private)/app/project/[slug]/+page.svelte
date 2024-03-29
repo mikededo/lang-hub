@@ -6,6 +6,7 @@
   import { Keys, pathTo } from '$lib/config';
   import { getProject } from '$lib/db';
   import { CreatePhraseButton, PhrasesList, PhrasesListSkeleton } from '$lib/domain/phrases';
+  import { PreviewTranslationsButton, PreviewTranslationsDialog } from '$lib/domain/translations';
 
   import type { PageData } from './$types';
 
@@ -50,8 +51,11 @@
         <div class="h-10 w-1/3 animate-pulse rounded bg-muted" />
       {:else if $query.data}
         <h2 class="text-4xl font-bold">{$query.data.name}</h2>
+        <div class="flex items-center gap-2">
+          <PreviewTranslationsButton />
+          <CreatePhraseButton />
+        </div>
       {/if}
-      <CreatePhraseButton />
     </div>
     {#if $query.isLoading}
       <PhrasesListSkeleton />
@@ -60,3 +64,4 @@
     {/if}
   </div>
 </Container>
+<PreviewTranslationsDialog project={+slug} />

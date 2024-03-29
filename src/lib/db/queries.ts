@@ -69,6 +69,17 @@ export const getAvailableLanguagesQuery = (client: Client) =>
 export const getAvailableLanguages = async (client: Client) =>
   (await withUnauthorizedRedirect(client, await getAvailableLanguagesQuery(client))).data;
 
+type ExportTranslationsArgs = {
+  project: Tables<'projects'>['id'];
+  language: Tables<'languages'>['id'];
+};
+export const getLanguageJSONToExportQuery = (
+  client: Client,
+  { project, language }: ExportTranslationsArgs,
+) => client.rpc('get_project_language_translations', { p_id: project, l_id: language });
+export const getLanguageJSONToExport = async (client: Client, data: ExportTranslationsArgs) =>
+  (await getLanguageJSONToExportQuery(client, data)).data;
+
 /* MUTATIONS */
 
 // USER

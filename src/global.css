@@ -13,12 +13,13 @@
     );
 
     --font-sans: 'Geist';
+    --font-mono: 'Geist Mono';
   }
 
   :root {
     --background: theme('colors.white');
     --foreground: theme('colors.gray.700');
-    --muted: theme('colors.secondary.100');
+    --muted: 210 17% 93%;
     --muted-foreground: theme('colors.foreground');
     --border: theme('colors.secondary.200');
   }
@@ -26,7 +27,7 @@
   .dark {
     --background: theme('colors.slate.950');
     --foreground: theme('colors.white');
-    --muted: theme('colors.secondary.900');
+    --muted: 210 15% 18%;
     --muted-foreground: theme('colors.foreground');
     --border: theme('colors.secondary.800');
   }
@@ -36,6 +37,12 @@
   font-family: 'Geist';
   font-display: swap;
   src: url('/fonts/Geist.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-display: swap;
+  src: url('/fonts/GeistMono.ttf') format('truetype');
 }
 
 html {

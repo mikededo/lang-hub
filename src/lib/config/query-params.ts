@@ -12,5 +12,6 @@ export const QUERY_PARAM_VALUES = {
     deleteProject: 'delete-project',
     createPhrase: 'create-phrase',
     deletePhrase: 'delete-phrase',
+    previewTranslations: 'preview-translations',
   },
 } as const;

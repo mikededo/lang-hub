@@ -116,7 +116,7 @@ export default {
           50: '#ffebeb',
         },
         muted: {
-          DEFAULT: 'var(--muted)',
+          DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
           foreground: 'var(--muted-foreground)',
         },
       },

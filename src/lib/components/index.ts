@@ -6,6 +6,7 @@ export * from './combobox';
 export * from './dialog';
 export * from './icon-button';
 export * from './input';
+export * from './json-preview';
 export * from './layout';
 export * from './menu';
 export * from './theme-toggler';

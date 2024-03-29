@@ -9,3 +9,8 @@ export const PROJECT_PHRASE = (project: string, phrase: string) => [
   phrase,
 ];
 export const PHRASES = ['phrases'];
+export const PREVIEW_TRANSLATIONS = (project: number, language: number) => [
+  'preview',
+  `project:${project}`,
+  `language:${language}`,
+];
