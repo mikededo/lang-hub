@@ -16,12 +16,12 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@supabase/ssr": "0.1.0",
-    "@supabase/supabase-js": "2.40.0",
-    "@tanstack/svelte-query": "5.28.8",
-    "@tanstack/svelte-query-devtools": "5.28.8",
-    "lucide-svelte": "0.363.0",
-    "tailwind-merge": "2.2.2"
+    "@supabase/ssr": "0.4.0",
+    "@supabase/supabase-js": "2.44.2",
+    "@tanstack/svelte-query": "5.49.1",
+    "@tanstack/svelte-query-devtools": "5.49.1",
+    "lucide-svelte": "0.399.0",
+    "tailwind-merge": "2.3.0"
   },
   "devDependencies": {
     "@melt-ui/pp": "0.3.0",
